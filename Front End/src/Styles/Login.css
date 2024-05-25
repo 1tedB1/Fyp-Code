@@ -1,0 +1,71 @@
+.loginHeading{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2% 0;
+}
+.loginHeading img{
+    width: 6%;
+}
+.loginHeading h1{
+    margin: 0;
+    font-size:1.6rem;
+}
+.loginFormDiv{
+    
+    background-color: #f3f3e7;
+    border-radius: 5px;
+    width: 50%;
+    margin: 5% 25%;
+    margin-top: 1%;
+    /* outline: 1px solid red; */
+    padding: 4%;
+    color: #6b6b6c;
+}
+
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    
+}
+.loginForm>div{
+    display: flex;
+    flex-direction: column;
+}
+
+.loginFormDiv input{
+    border: none;
+    width: 95%;
+    padding-right: 2%;
+    /* margin-top: 3%; */
+    /* background-color: white; */
+    /* border-radius: 5px; */
+}
+
+.loginButton{
+    margin: 3% 40%;
+    width: 20%;
+    border-radius: 10px;
+    background-color: #c6c6c6;
+    border: none;
+    /* margin-right: 40%; */
+}
+.inputDiv{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /* justify-content: spac; */
+    align-items: center;
+    border: 1px solid #6b6b6c;
+    /* padding: 1%; */
+}
+.inputDiv .iconDiv{
+    /* margin: 2%; */
+    padding: 1%;
+    width: 5%;
+    border-left: 1px solid #a7a7a9;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}

@@ -1,0 +1,59 @@
+@import url(./variables.css);
+@import url(./navBar.css);
+@import url(./landPage.css);
+@import url(./Card.css);
+@import url(./footer.css);
+@import url(./Login.css);
+@import url(./HomePage.css);
+@import url(./Register.css);
+@import url(./AboutUs.css);
+@import url(./Competition.css);
+@import url(./UploadContent.css);
+@import url(./ViewContent.css);
+/* Custom Font Regular */
+@font-face {
+  font-family: 'Noto Nastaliq Urdu';
+  src: url("../assets/Fonts/NotoNastaliqUrdu-Regular.ttf") format('truetype');
+  font-weight:normal;
+  font-style: normal;
+}
+
+/* Custom Font Bold */
+@font-face {
+  font-family: 'Noto Nastaliq Urdu Bold';
+  src: url('../assets/Fonts/NotoNastaliqUrdu-Bold.ttf') format('truetype');
+  font-weight: bolder;
+  font-style: normal;
+}
+
+/* Custom Font Italic */
+@font-face {
+  font-family: 'Noto Nastaliq Urdu Semi';
+  src: url('../assets/Fonts/NotoNastaliqUrdu-SemiBold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
+* {
+  direction: rtl;
+  font-family: 'Noto Nastaliq Urdu', serif;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  /* font-size: large; */
+}
+h1{
+  font-family: 'Noto Nastaliq Urdu', serif; 
+}
+input{
+  outline:none;
+  padding: .5%;
+  background-color: #EFEFE6;
+}
+body{
+  background-color: #F8F9FA;
+}
+button:hover{
+  cursor: pointer;
+}

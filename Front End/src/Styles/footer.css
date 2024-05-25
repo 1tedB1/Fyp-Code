@@ -1,0 +1,35 @@
+.footer{
+    display: flex;
+    min-width: 96%;
+    justify-content: space-evenly;
+    padding: 3%;
+    /* margin: 1%; */
+    /* background-color: #C7C8CB; */
+    background-color: var(--bg-300);
+    margin-top: 0;
+}
+
+.footer *{
+    /* border: 1px solid black; */
+    width: 100%;
+    padding: 1% 5%;
+    /* margin: 0; */
+    
+}
+.footer--logo{
+    width: 100px;
+}
+
+.footer--emailForm{
+    padding: 0px;
+    margin: 0;
+}
+
+.footer--emailForm input{
+    width: 70%;
+}
+
+.footer--emailForm button{
+    width: 25%;
+    border: 1px solid #97989a;
+}

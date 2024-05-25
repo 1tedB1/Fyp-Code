@@ -1,0 +1,12 @@
+.Box{
+  padding: 25px;
+  border: 3px solid black;
+  /* display: flex; */
+
+}
+
+/* .Box *{
+  padding: 10%;
+  width: 20%;
+  outline: 1px solid black;
+} */

@@ -1,0 +1,41 @@
+.uploadContent_form {
+    /* background-color: black; */
+    display: flex;
+    flex-direction: column;
+    border: 2.5px solid #DFE4E6;
+    border-radius: 10px;
+    margin: 5%;
+}
+
+.uploadContent_form>* {
+    width: 35%;
+    margin: 1%;
+
+
+}
+
+.uploadContent_title {
+    margin-top: 2.5%;
+    border: 2.5px solid #DFE4E6;
+    border-radius: 10px;
+}
+
+.uploadContent_content {
+    width: 70%;
+    border: 2.5px solid #DFE4E6;
+    border-radius: 10px;
+    height: 70rem;
+    overflow: auto;
+    padding: 1.4%;
+
+}
+
+.uploadContent_button {
+    width: 14%;
+    border: 2.5px solid #DFE4E6;
+    border-radius: 10px;
+    margin: auto;
+    /* margin-top: 1.5%; */
+    font-size: larger;
+    margin-bottom: 2%;
+}

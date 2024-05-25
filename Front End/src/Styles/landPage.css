@@ -1,0 +1,98 @@
+.landPage {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.firstHalf {
+    /* background-color: #EFEFE6; */
+    background-color: var(--bg-200);
+    display: flex;
+    padding: 5.5%;
+    margin: 0;
+    justify-content: space-between;
+}
+
+.writtenPart {
+    margin: 7%;
+    margin-right: 0;
+    width: 40%;
+    height: 200%;
+}
+
+.emailForm {
+    display: flex;
+    margin: 2%;
+    align-items: center;
+
+
+}
+
+.emailInput {
+    border: 1px solid lightgray;
+    background-color: white;
+    width: 60%;
+    margin: 3%;
+    height: 40%;
+    border-radius: 5px;
+}
+
+
+.emailButton {
+    border: none;
+    background-color: #cbcbcb;
+    width: 30%;
+    height: 40%;
+    margin: 3%;
+    border-radius: 5px;
+
+}
+
+.firstImage {
+    object-fit: cover;
+    opacity: 0.8;
+    border-radius: 10px;
+    filter: grayscale(50%);
+    width: 50%;
+}
+
+.secondHalf {
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    /* margin: 5% 0%; */
+    width: 100%;
+    padding: 5% 8%;
+    background-color: var(--bg-100);
+}
+
+.headings {
+    margin: auto;
+}
+
+.cards {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    margin: 5% 0% 5% 5%;
+    /* margin: 4%; */
+}
+
+.cards * {
+    margin: auto;
+}
+
+.testimonial{
+    background-color: #EFEFE6;
+    display: flex;
+    flex-direction: column;
+    /* width: 100%; */
+    /* outline: 1px solid black; */
+    padding: 3%;
+    /* margin: 1%; */
+    background-color: var(--bg-200);
+    margin-bottom: 0;
+}
+
+.thirdHeading{
+    margin-bottom: 1%;
+}
