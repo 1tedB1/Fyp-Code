@@ -8,8 +8,7 @@ const mongoose = require('mongoose');
 // mongoose.connect('mongodb://localhost:27017/Andaz-E-Bayan', { useNewUrlParser: true, useUnifiedTopology: true });
 // mongoose.Promise = global.Promise;
 
-
-module.exports.createContent = catchAsync(async (req, res) => {
+const createContent = catchAsync(async (req, res) => {
     console.log(req.body);
     const { title, content, author, prevPart } = req.body;
     const newArticle = await ArticleData.create({
@@ -29,6 +28,7 @@ module.exports.createContent = catchAsync(async (req, res) => {
         data: newArticle
     });
 })
+module.exports.createContent = createContent;
 
 module.exports.likeContent = catchAsync(async (req, res) => {
 
@@ -52,6 +52,7 @@ module.exports.likeContent = catchAsync(async (req, res) => {
     await article.save();
 
 })
+
 
 module.exports.disLikeContent = catchAsync(async (req, res) => {
 
@@ -121,20 +122,61 @@ module.exports.removeContent = catchAsync(async (req, res) => {
     await article.remove();
 })
 
+const getAllArticles = catchAsync(async (req, res) => {
+    const articles = await ArticleData.find().populate(
+        {
+            path: 'author',
+        }
+    
+    ).populate(
+        {
+            path: 'nextPart',
+        }
+    ).populate(
+        {
+            path: 'prevPart',
+        }
+    ).populate(
+        {
+            path: 'comments',
+        }
+    ).populate(
+        {
+            path: 'views',
+        }
+    ).populate(
+        {
+            path: 'likes',
+        }
+    ).populate(
+        {
+            path: 'dislikes',
+        }
+    );
+    // console.log(articles);
+    res.status(200).json({
+        success: true,
+        data: articles
+    });
+})
 
+module.exports.getAllArticles = getAllArticles;
 
 
 
 req = {
     body: {
-        articleId: '664ed78989f076f759eb06c4',
-        userId: '662a7c1777f6677bc4220fe3'
+        title:"dfd",
+        content:"dfdfdf",
+        author:"664e4b9b761ff701be245a1f",
+        // prevPart:""
     }
 }
 
 
 
 res = {}
-
-likeContent(req, res)
+// createContent(req, res)
+// getAllArticles(req, res)
+// likeContent(req, res)
 

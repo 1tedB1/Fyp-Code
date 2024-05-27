@@ -21,9 +21,10 @@ const teamSchema = new mongoose.Schema({
     },
 
 
-});
+} , {collection:"team-data"}
+);
 
 ;
 
 // Export the article model
-module.exports = mongoose.model('FeedbackData', articleSchema);
+module.exports = mongoose.model('TeamData', articleSchema);

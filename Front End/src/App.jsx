@@ -34,7 +34,7 @@ function App() {
           <Route path='/aboutus' element={<AboutUs />}></Route>
           <Route path='/uploadContent' element={<UploadContent />}></Route>
           <Route path='/competition' element={<Competition />}></Route>
-          <Route path='/viewContent' element={<ViewContent />}></Route>
+          <Route path='/viewContent/:id' element={<ViewContent />}></Route>
         </Routes>
         <Footer></Footer>
       </Router>

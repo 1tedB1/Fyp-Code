@@ -10,5 +10,4 @@ router.get('/getAll', getAllUsers)
 router.get('/user', getUser)
 
 
-
 module.exports = router

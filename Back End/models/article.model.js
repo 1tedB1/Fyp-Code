@@ -9,17 +9,17 @@ const articleSchema = new mongoose.Schema({
 
     likes: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: "UserData",
     }],
 
     dislikes: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: "UserData",
     }],
 
     views:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: "UserData",
     }],
 
     content: {
@@ -51,7 +51,8 @@ const articleSchema = new mongoose.Schema({
         ref: 'FeedbackData',
     }],
 
-});
+}, {collection:"article-data"}
+);
 
 ;
 

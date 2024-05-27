@@ -1,53 +1,66 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChartBar, faComment, faThumbsDown, faThumbsUp, faUser, faUsersViewfinder } from '@fortawesome/free-solid-svg-icons'
 import { NavLink } from "react-router-dom";
+import { getAllArticles } from '../slices/contentSlice'
+import { getAllFeedBack } from '../slices/feedbackSlice';
 function HomePage() {
 
+  const dispatch = useDispatch()
+  const state = useSelector(state => state.content)
+
+  useEffect(() => {
+    dispatch(getAllArticles())
+    dispatch(getAllFeedBack())
+    console.log(state.articles);
+  }, [dispatch])
+
+  useEffect(() => {
+    console.log(state.articles);
+  }, [state])
 
 
-  function getArticles() {
 
 
-
-    fetch('/api/articles')
-      .then(response => response.json())
-      .then(data => {
-        // Process the data and update the state or do something with it
-      })
-      .catch(error => {
-        // Handle the error
-      });
-
-
-
-      
+  const renderArticles = () => {
+    return state.articles.map((article, index) => {
+      return (
+        <Article
+          key = {index}
+          title={article.title}
+          id={index}
+          content={article.content}
+          likes={article.likes}
+          dislikes={article.dislikes}
+          comments={article.comments}
+          views={article.views}>
+        </Article>
+      )
+    })
   }
 
 
 
 
-
-
-
-
-
-  function Article({ title }) {
+  function Article({ title, cDate, content, likes, dislikes, comments, views,id }) {
     if (title == null) {
       title = "حسینوں پہ ہم کو بروسہ نہیں ہے"
     }
+    console.log(id);
+
     return (
       <div className='article '>
-        <NavLink to="/viewcontent" className={"navlink"} state={{ title: title }}>
+        <NavLink to={`/viewcontent/${id}`} className={"navlink"} state={{ title: title }}>
           <h2 className='article_heading'>{title}</h2>
         </NavLink>
-        <p className='date'>2 جون 2023</p>
-        <p className='article_content'>حسینوں پہ ہم کو بروسہ نہیں  نہیں نہیں نہیں نہیں نہیں نہیں نہیں نہیں نہیں حسینوں پہ ہم کو بروسہ نہیں  نہیں نہیں نہیں نہیں نہیں نہیں نہیں نہیں نہیں نہیں نہیں ہے</p>
+        <p className='date'>{cDate}</p>
+        <p className='article_content'>{content.slice(0, 450) + " ......"}</p>
         <div className="article_icons">
-          <button className='article_icon'><FontAwesomeIcon icon={faThumbsUp} /><p>لائک</p></button>
-          <button className='article_icon'><FontAwesomeIcon icon={faThumbsDown} /><p>ڈس لائک</p></button>
-          <button className='article_icon'><FontAwesomeIcon icon={faComment} /><p>کمنٹ</p></button>
-          <button className='article_icon'><FontAwesomeIcon icon={faChartBar} /><p>234</p></button>
+          <button className='article_icon'><FontAwesomeIcon className={'article_icon_img'} icon={faThumbsUp} /><p>لائک{`(${likes.length})`}</p></button>
+          <button className='article_icon'><FontAwesomeIcon className={'article_icon_img'} icon={faThumbsDown} /><p>ڈس لائک{`(${dislikes.length})`}</p></button>
+          <button className='article_icon'><FontAwesomeIcon className={'article_icon_img'} icon={faComment} /><p>کمنٹ{`(${comments.length})`}</p></button>
+          <button className='article_icon'><FontAwesomeIcon className={'article_icon_img'} icon={faChartBar} /><p>{`(${views.length})`}</p></button>
         </div>
       </div>
     )
@@ -60,12 +73,12 @@ function HomePage() {
 
 
       </div>
-      <Article title={"ہم تم اور سفر محبت"}></Article>
+      {/* <Article title={"ہم تم اور سفر محبت"}></Article>
       <Article></Article>
       <Article></Article>
       <Article></Article>
-      <Article></Article>
-
+      <Article></Article> */}
+      {renderArticles()}
     </div>
   )
 }

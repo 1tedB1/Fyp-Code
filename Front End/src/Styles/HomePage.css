@@ -33,13 +33,19 @@
     /* outline: 1px solid black; */
 }
 .article_icons > *{
-    width: 10%;
+    width: 15%;
     display: flex;
     padding: 0;
     align-items: center;
     justify-content: space-evenly;
 
 }
+
+.article_icon>.article_icon_img{
+    /* background-color: black; */
+    /* height: 10%; */
+}
+
 .article_icons>*:last-child{
     border-left: 1px solid lightgrey;
 }

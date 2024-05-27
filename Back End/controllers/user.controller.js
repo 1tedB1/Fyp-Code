@@ -45,13 +45,11 @@ module.exports.getAllUsers = (catchAsync(async (req, res) => {
     console.log("here");
     const users = await User.find();
     res.status(201).json({
-        success: true,
-        message: "All users fetched successfully",
         data: users
     });
 }))
 
-module.exports.getUser() = catchAsync(async (req, res) => {
+module.exports.getUser = catchAsync(async (req, res) => {
     const {token} = req.body
     const decoded = jwt.verify(token, "andazebayan")
     const user = await User.findById(decoded);

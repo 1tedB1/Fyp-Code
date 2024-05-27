@@ -1,6 +1,9 @@
 //create an express server
 const express = require('express');
 const app = express();
+const userRoute = require('./routes/user.route')
+const contentRoute = require('./routes/article.route')
+const feedbackRoute = require('./routes/feedback.route')
 // // const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -22,12 +25,15 @@ mongoose.Promise = global.Promise;
 
 
 //testing purpose 
-const user = require('./routes/user.route')
 // console.log(user);
-app.use('/api/v1', user);
+app.use('/api/v1', userRoute);
+app.use('/api/v1', contentRoute);
+app.use('/api/v1', feedbackRoute);
+
 
 // app.post('/test', async (req, res) => {})
 
+//Debugigng purposes
 const listRoutes = () => {
     const routes = [];
     app._router.stack.forEach(middleware => {
@@ -53,6 +59,12 @@ const listRoutes = () => {
 
 listRoutes()
 
+const modelNames = Object.keys(mongoose.models);
+
+// Iterate over the model names and get the associated schemas
+Object.keys(mongoose.models).forEach(modelName => {
+    console.log(modelName);
+});
 // console.dir(app);
 // ended 
 

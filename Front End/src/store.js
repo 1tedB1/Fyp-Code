@@ -1,6 +1,8 @@
 import { createSlice, configureStore, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
 import userSlice from "./slices/userSlice";
+import contentSlice from "./slices/contentSlice";
+import feedbackSlice from "./slices/feedbackSlice";
 
 
 
@@ -9,13 +11,16 @@ import userSlice from "./slices/userSlice";
 
 const store = configureStore({
     reducer: {
-        user: userSlice
+        user: userSlice,
+        content: contentSlice,
+        feedback: feedbackSlice
     }
 })
 
 // console.log(await store.dispatch(fetchUser()));
 // const ans = await store.dispatch(fetchUser())
 // console.log(ans);
+// store.dispatch(fetchUser())
 
 export default store
 

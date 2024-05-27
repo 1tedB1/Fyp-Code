@@ -6,6 +6,8 @@ export const fetchUsers = createAsyncThunk("user/fetchUsers", async () => {
     try {
         const response = await axios.get("http://localhost:4000/api/v1/getAll")
         // console.log(response.data);
+        // console.log("f", response.data.data);
+        return response.data
     } catch (e) {
         console.log(e);
     }
@@ -45,18 +47,29 @@ export const getUser = createAsyncThunk("user/getUser", async () => {
 const userSlice = createSlice({
     name: "user",
     initialState: {
+        users:[],
         isAuthenticated: false,
         status: "loggedOut",
         userId: "",
-        token: ""
+        token: "",
+        
     },
     reducers: {
-        logOutUser: (state,) => {
+        logOutUser: (state) => {
             state.userId = ""
             state.token = ""
             state.isAuthenticated = false;
             state.status = 'loggedOut';
             localStorage.removeItem("token")
+        },
+        getUserById: (state, action)=> {
+            // state.users.forEach(element => {
+            //     if(element._id == action.payload){
+            //         return element;
+            //     }
+            // });
+            // console.log(state.users);
+            console.log(state.users);
         }
     },
     extraReducers: (builder) => {
@@ -66,7 +79,7 @@ const userSlice = createSlice({
             })
             .addCase(fetchUsers.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.user = action.payload;
+                state.users = action.payload;
                 state.isAuthenticated = true;
             })
             .addCase(fetchUsers.rejected, (state, action) => {
@@ -112,6 +125,8 @@ const userSlice = createSlice({
 
 // console.dir(userSlice.actions);
 
+export const { logOutUser,getUserById } = userSlice.actions
 export default userSlice.reducer
-export const { login } = userSlice.actions
+
+// export const { login,logOutUser, } = userSlice.actions
 

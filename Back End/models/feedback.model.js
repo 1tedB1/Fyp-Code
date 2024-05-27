@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 // Define the article schema
-const FedbackSchema = new mongoose.Schema({
+const FedbackSchema = new Schema({
    
 
     owner: {
@@ -34,9 +34,18 @@ const FedbackSchema = new mongoose.Schema({
         ref: 'FeedbackData',
     },
 
-});
+}, {collection:"feedback-data"}
+);
 
 ;
 
 // Export the article model
-module.exports = mongoose.model('FeedbackData', articleSchema);
+// const FeedbackData = mongoose.model("FeedbackData",FedbackSchema )
+// console.log("FeedbackData", FeedbackData);
+// console.log("herer");
+// Object.keys(mongoose.models).forEach(modelName => {
+//     console.log(modelName);
+// });
+// module.exports.FeedbackData = FeedbackData;
+// module.exports = mongoose.model('UserData', User);
+module.exports = mongoose.model('FeedbackData', FedbackSchema);

@@ -26,9 +26,10 @@ const pairSchema = new mongoose.Schema({
     }
 
 
-});
+} , {collection:"pair-data"}
+);
 
 ;
 
 // Export the article model
-module.exports = mongoose.model('FeedbackData', articleSchema);
+module.exports = mongoose.model('PairData', articleSchema);

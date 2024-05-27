@@ -2,7 +2,10 @@ import React from 'react'
 // import Card from "Card";
 import Cards from './Cards';
 import Card from "./Card";
+
 function LandPage() {
+
+
     return (
         <div className="landPage">
             <div className="firstHalf">
