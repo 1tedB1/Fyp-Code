@@ -12,7 +12,7 @@ function HomePage() {
 
   useEffect(() => {
     dispatch(getAllArticles())
-    dispatch(getAllFeedBack())
+    // dispatch(getAllFeedBack())
     console.log(state.articles);
   }, [dispatch])
 

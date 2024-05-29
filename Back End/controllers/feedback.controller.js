@@ -1,30 +1,40 @@
 const catchAsync = require("../middlewares/catchAsync");
 const Feedback = require('../models/feedback.model')
+const Article = require('../models/article.model')
+// const User = require('../models/user.model')
 // const User = require('../models/user.model');
 const ErrorHandler = require('../utils/errorHandler');
 const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/Andaz-E-Bayan', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.Promise = global.Promise;
+// mongoose.connect('mongodb://localhost:27017/Andaz-E-Bayan', { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.Promise = global.Promise;
 
 // console.log("feedback ", Feedback);
 
 const createFeedback = catchAsync(async (req, res) => {
-    console.log(req.body);
-    const { rating, owner, targetContent, parentFeedback } = req.body;
+    // console.log(req.body);
+    const { content, rating, owner, targetContent, parentFeedback } = req.body;
 
     const newFeedback = await Feedback.create({
         rating,
         owner,
         targetContent,
+        content,
         parentFeedback
     });
 
     if (parentFeedback) {
-        const parentFeedback = await feedback.findById(parentFeedback);
+        const parentFeedback = await Feedback.findById(parentFeedback);
         parentFeedback.replies.push(newFeedback._id);
+        await parentFeedback.save();
     }
+
+    const article = await Article.findById(targetContent);
+    // console.log(article);
+    article.comments.push(newFeedback._id);
+    await article.save();
+
 
     console.log("New feedback created:", newFeedback);
     res.status(201).json({
@@ -65,7 +75,7 @@ module.exports.removeFeedback = catchAsync(async (req, res) => {
 
 const getFeedback = catchAsync(async (req, res) => {
     const { feedbackId } = req.body;
-    console.log("getFeedback");
+    // console.log("getFeedback");
     try{
     const feedback = await Feedback.findById(feedbackId);
     if (feedback) {
@@ -73,7 +83,7 @@ const getFeedback = catchAsync(async (req, res) => {
             success: true,
             data: feedback
         });
-        console.log("feedback", feedback);
+        // console.log("feedback", feedback);
     }
     else {
         return next(new ErrorHandler("Feedback not found", 404));
@@ -86,7 +96,7 @@ module.exports.getReplies = catchAsync(async (req, res) => {
     const { feedbackId } = req.body;
     try{
     const feedback = await Feedback.findById(feedbackId);
-    console.log(feedback);
+    // console.log(feedback);
     if (feedback) {
         const replies = [];
         for (let i = 0; i < feedback.replies.length; i++) {

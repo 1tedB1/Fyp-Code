@@ -32,4 +32,4 @@ const pairSchema = new mongoose.Schema({
 ;
 
 // Export the article model
-module.exports = mongoose.model('PairData', articleSchema);
+module.exports = mongoose.model('PairData', pairSchema);

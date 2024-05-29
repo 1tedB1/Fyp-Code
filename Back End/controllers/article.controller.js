@@ -10,17 +10,24 @@ const mongoose = require('mongoose');
 
 const createContent = catchAsync(async (req, res) => {
     console.log(req.body);
-    const { title, content, author, prevPart } = req.body;
+    const { title, content, author, prevPart,tags, nextPart } = req.body;
     const newArticle = await ArticleData.create({
         title,
         content,
         author,
-        prevPart
+        prevPart,
+        tags,
+        nextPart
     });
     if (prevPart) {
         const prevPartArticle = await ArticleData.findById(prevPart);
         prevPartArticle.nextPart = newArticle._id;
+        await prevPartArticle.save()
     }
+    const owner = await User.findById(author);
+    owner.articles.push(newArticle._id);
+    await owner.save();
+
     console.log("New article created:", newArticle);
     res.status(201).json({
         success: true,
@@ -151,6 +158,10 @@ const getAllArticles = catchAsync(async (req, res) => {
     ).populate(
         {
             path: 'dislikes',
+        }
+    ).populate(
+        {
+            path: 'tags',
         }
     );
     // console.log(articles);

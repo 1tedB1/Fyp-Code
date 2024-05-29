@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 
 module.exports.singupUser = catchAsync(async (req, res) => {
-    console.log("here");
+    // console.log("sign here");
     const { name, email, password, dob, avatar, isAdmin } = req.body;
 
     // avatar = (avatar == null) ? 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png' : avatar;
@@ -42,17 +42,35 @@ module.exports.singupUser = catchAsync(async (req, res) => {
 });
 
 module.exports.getAllUsers = (catchAsync(async (req, res) => {
-    console.log("here");
-    const users = await User.find();
+    // console.log("here");
+    const users = await User.find().populate(
+        {
+            path: 'blockedUsers',
+        }
+    ).populate(
+        {
+            path: 'articles',
+        }
+    );
     res.status(201).json({
         data: users
     });
 }))
 
 module.exports.getUser = catchAsync(async (req, res) => {
+    // console.log("hi");
     const {token} = req.body
+    // console.log("hi",token);
     const decoded = jwt.verify(token, "andazebayan")
-    const user = await User.findById(decoded);
+    const user = await User.findById(decoded).populate(
+        {
+            path: 'blockedUsers',
+        }
+    ).populate(
+        {
+            path: 'articles',
+        }
+    );
     res.status(201).json({
         success: true,
         message: "User logged successfully",
@@ -63,7 +81,15 @@ module.exports.getUser = catchAsync(async (req, res) => {
 module.exports.loginUser = catchAsync(async (req, res, next) => {
     const { email, password } = req.body;
     //check if user exists in mongoo db by matching email and password
-    const user = await User.findOne({ email: email, password: password })
+    const user = await User.findOne({ email: email, password: password }).populate(
+        {
+            path: 'blockedUsers',
+        }
+    ).populate(
+        {
+            path: 'articles',
+        }
+    );
     if (user) {
         console.log(user.email);
         const token = jwt.sign(user.id, "andazebayan")

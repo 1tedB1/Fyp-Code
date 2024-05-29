@@ -4,11 +4,22 @@ import axios from "axios";
 export const getAllFeedBack = createAsyncThunk("feedback/getAllFeedBack", async () => {
     try {
         const response = await axios.get("http://localhost:4000/api/v1/getAllFeedback")
+        return response.data.data
+    } catch (e) {
+        console.log(e);
+        throw e
+    }
+})
+
+export const addFeedback = createAsyncThunk("feedback/addFeedback", async (feedback) => {
+    try {
+        const response = await axios.post("http://localhost:4000/api/v1/createFeedback", feedback)
         return response.data
     } catch (e) {
         console.log(e);
     }
 })
+
 
 const feedbackSlice = createSlice({
     name: "feedback",
@@ -39,6 +50,10 @@ const feedbackSlice = createSlice({
             .addCase(getAllFeedBack.rejected, (state) => {
                 state.status = 'failed'
                 state.error = action.error.message
+            })
+            .addCase(addFeedback.fulfilled, (state, action) => {
+                state.feedbacks.push(action.payload)
+                console.log("state" , state.feedbacks);
             })
     }
     // extraReducers: {

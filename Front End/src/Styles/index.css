@@ -10,6 +10,7 @@
 @import url(./Competition.css);
 @import url(./UploadContent.css);
 @import url(./ViewContent.css);
+@import url(./PopUp.css);
 /* Custom Font Regular */
 @font-face {
   font-family: 'Noto Nastaliq Urdu';

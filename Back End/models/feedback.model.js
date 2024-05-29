@@ -19,7 +19,7 @@ const FedbackSchema = new Schema({
 
     rating: {
         type: Number,
-        required: true
+        
     },
 
     targetContent:{
@@ -33,6 +33,9 @@ const FedbackSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'FeedbackData',
     },
+    content:{
+        type:String
+    }
 
 }, {collection:"feedback-data"}
 );

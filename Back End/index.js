@@ -1,9 +1,7 @@
 //create an express server
 const express = require('express');
 const app = express();
-const userRoute = require('./routes/user.route')
-const contentRoute = require('./routes/article.route')
-const feedbackRoute = require('./routes/feedback.route')
+
 // // const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -20,15 +18,19 @@ mongoose.Promise = global.Promise;
 
 
 
+const userRoute = require('./routes/user.route')
+const contentRoute = require('./routes/article.route')
+const feedbackRoute = require('./routes/feedback.route')
+const tagRoute = require('./routes/tag.route')
 
-
-
-
-//testing purpose 
-// console.log(user);
 app.use('/api/v1', userRoute);
 app.use('/api/v1', contentRoute);
 app.use('/api/v1', feedbackRoute);
+app.use('/api/v1', tagRoute);
+
+//testing purpose 
+// console.log(user);
+
 
 
 // app.post('/test', async (req, res) => {})

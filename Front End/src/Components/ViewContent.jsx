@@ -4,66 +4,90 @@ import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 import { articleSelected, getAllArticles } from "../slices/contentSlice";
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers, getUserById } from '../slices/userSlice';
+import { fetchUsers, getUser, getUserById } from '../slices/userSlice';
+import { addFeedback } from '../slices/feedbackSlice';
 
 function ViewContent() {
 
     const { id } = useParams();
     const dispatch = useDispatch()
-    const contatnState = useSelector(state => state.content)
+    const contentState = useSelector(state => state.content)
+    const userState = useSelector(state => state.user)
+    const [newCommentContent, setNewCommentContent] = useState("اپنی رائیں ہمیں دیں")
 
-    const [author, setAuthor] = useState(null)
-    const [authorName, setAuthorName] = useState("")
+
     useEffect(() => {
         dispatch(getAllArticles())
+        dispatch(fetchUsers())
         dispatch(articleSelected(id))
+        dispatch(getUser())
+        // console.log(localStorage.getItem("token"));
         // dispatch(fetchUsers())
     }, [])
-    const userState = useSelector(state => state.user)
-    // const getUserById = (id)=>{
-    //     userState.users.forEach(element => {
-    //         if(element._id == id){
 
-    //             return element;
-    //         }
-    //     });
-    // }
-    // const [article, setArticle] = useState()
-    const article = contatnState.articles[id]
-    console.log(article);
-
-    useEffect(() => {
-        // setAuthor(getUserById(article.author))
-        // setAuthorName(author.name)
-    }, [userState])
-    let title, content, authName;
-    try {
-        title = article.title
-        content = article.content
-        authName = article.author.name
-    } catch (error) {
-        console.log("Well done");
+    if (contentState.status == "loading" || contentState.status == "idle"
+        || userState.status == "loading" || userState.status == "loggedOut"
+    ) {
+        return <h1>Loading...</h1>;
     }
-    // const author = dispatch(getUserById(article.author))
-    // const authorName = author.name;
+
+    // let title="", content="", authName="", comments="";
+    const article = contentState.articles[id]
+    // console.dir(article)
+    const { title, content, comments } = article
+    // console.log("author ", article.author);
+    const authName = userState.users.find(user => user._id == article.author._id).name
+
+    // console.log("test" , authName);
+    // console.log("authName = ",authName);
+    // console.log("title = ",title, "content = ",content, "comments = ",comments);
 
 
-    // const { title, content } = article
-    // console.log(title, content);
+
     //Comment Component
-    function Comment() {
+    function Comment({ auth, content }) {
+        const commentAuthor = userState.users.find(user => user._id == auth)
+        const { name: commentAuthorName, avatar: commentAuthorImage } = commentAuthor
         return (
             <div className='comment'>
                 <div className="comment_user">
-                    <img src="./src/assets/logo.png" alt="" width={'40px'} height={'40px'} />
-                    <p>یوذر</p>
+                    <img src={commentAuthorImage} alt="" width={'40px'} height={'40px'} />
+                    <p>{commentAuthorName}</p>
                 </div>
                 <p className="comment_content">
-                    پسند ہے" نائیلہ کو اندازہ تھا کہ یہ بحث کہاں جائے گی ورنہ مجال کہ وہ اپنی اولاد کے ساتھ کھڑی نہ ہوتی "بھابھی رشتہ تو بھائی صاحب نے کیا تھا، پھر میں" "بھائی صاحب مر گئے، تم اپنا بتاؤ" "چچی یہ کیا" کامران کا غصہ اب الجھن میں بدل گیا تھا۔ "نہیں بھابھی"
+                    {content}
                 </p>
             </div>
         )
     }
+
+    const renderComments = () => {
+        console.log("commments ", comments);
+        return comments.map((comment, index) => {
+            return <Comment
+                key={index}
+                auth={comment.owner}
+                content={comment.content}
+            />
+        })
+    }
+
+    const addComment = (e) => {
+        e.preventDefault()
+        if (newCommentContent == "اپنی رائیں ہمیں دیں" || newCommentContent == ""
+        ) {
+            return;
+        }
+        setNewCommentContent(e.target.children[0].innerText)
+        let content = newCommentContent;
+        console.log("to", localStorage.getItem("token"));
+        console.log(userState);
+        let owner = userState.userId;
+        let targetContent = article._id;
+        // console.log("content = ", content, "owner = ", owner, "targetContent = ", targetContent);
+        dispatch(addFeedback({ content, owner, targetContent }))
+    }
+
     return (
         <div className='viewContent'>
             <h1 className='title'>
@@ -84,8 +108,15 @@ function ViewContent() {
             </div>
             <div className="viewContent_comments">
                 <div className='write_comment_div'>
-                    <form action="" className='comment_form'>
+                    <form
+                        action=""
+                        className='comment_form'
+                        onSubmit={addComment}
+                    >
                         <span
+                            onChange={(e) => {
+                                console.log(e);
+                            }}
                             contentEditable
                             className='written_comment'
                             onClick={(e) => {
@@ -93,22 +124,25 @@ function ViewContent() {
                                 if (checkText == "اپنی رائیں ہمیں دیں") {
                                     e.target.innerText = ""
                                 }
+
+                                setNewCommentContent(checkText)
+
+
                             }}
                         >
-                            اپنی رائیں ہمیں دیں
+                            {newCommentContent}
                         </span>
-                        <button className="comment_button" type="submit">شائع کریں</button>
+                        <button
+                            className="comment_button"
+                            type="submit"
+                        >شائع کریں</button>
                     </form>
                     <p className='story_likes'>
                         <FontAwesomeIcon icon={faThumbsUp} className='searchIcon' />
                         21، لایکس</p>
                 </div>
                 <div className='posted_comments'>
-                    <Comment />
-                    <Comment />
-                    <Comment />
-                    <Comment />
-                    <Comment />
+                    {renderComments()}
 
                 </div>
             </div>

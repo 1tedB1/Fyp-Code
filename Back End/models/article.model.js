@@ -50,6 +50,11 @@ const articleSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'FeedbackData',
     }],
+    tags:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'TagData'
+    }]
+
 
 }, {collection:"article-data"}
 );

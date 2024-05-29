@@ -27,4 +27,4 @@ const teamSchema = new mongoose.Schema({
 ;
 
 // Export the article model
-module.exports = mongoose.model('TeamData', articleSchema);
+module.exports = mongoose.model('TeamData', teamSchema);

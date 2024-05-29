@@ -15,6 +15,16 @@ export const getAllArticles = createAsyncThunk('article/getAllArticles', async (
     }
 })
 
+export const createArticle = createAsyncThunk('article/createArticle', async (article) => {
+    try {
+        const response = await axios.post('http://localhost:4000/api/v1/createArticle', article)
+        return response.data.data
+    } catch (error) {
+        console.log(error);
+        throw new Error(error.message)
+    }
+})
+
 
 const contentSlice = createSlice({
     name: 'article',
@@ -51,6 +61,7 @@ const contentSlice = createSlice({
                 state.status = 'loading';
             })
             .addCase(getAllArticles.fulfilled, (state, action) => {
+                state.articles = [];
                 state.status = 'succeeded'
                 const articles = action.payload.data;
                 articles.forEach(element => {
@@ -62,6 +73,15 @@ const contentSlice = createSlice({
             .addCase(getAllArticles.rejected, (state) => {
                 state.status = 'failed'
                 state.error = action.error.message
+            })
+            .addCase(createArticle.pending, (state) => {
+                
+            })
+            .addCase(createArticle.fulfilled, (state,action) => {
+                // state.articles.push(action.payload)
+            })
+            .addCase(createArticle.rejected, (state) => {
+                
             })
     }
 

@@ -3,11 +3,11 @@ const { createContent, likeContent,disLikeContent,viewContent,removeContent,getA
 
 const router = express.Router()
 //define routes based on the functions exported 
-router.post('/createContent', createContent)
-router.post('/likeContent', likeContent)
-router.post('/disLikeContent', disLikeContent)
-router.post('/viewContent', viewContent)
-router.post('/removeContent', removeContent)
+router.post('/createArticle', createContent)
+router.post('/likeArticle', likeContent)
+router.post('/disLikeArticle', disLikeContent)
+router.post('/viewArticle', viewContent)
+router.post('/removeArticle', removeContent)
 router.get('/getAllArticles', getAllArticles)
 
 module.exports = router

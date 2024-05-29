@@ -3,6 +3,7 @@ import axios from "axios"
 import userSlice from "./slices/userSlice";
 import contentSlice from "./slices/contentSlice";
 import feedbackSlice from "./slices/feedbackSlice";
+import tagSlice from "./slices/tagSlice"
 
 
 
@@ -13,7 +14,8 @@ const store = configureStore({
     reducer: {
         user: userSlice,
         content: contentSlice,
-        feedback: feedbackSlice
+        feedback: feedbackSlice,
+        tag:tagSlice
     }
 })
 
