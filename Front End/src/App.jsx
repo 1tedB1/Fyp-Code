@@ -13,6 +13,7 @@ import HomePage from './Components/HomePage';
 import Test from './Components/Test';
 import Competition from './Components/Competition';
 import ViewContent from './Components/ViewContent';
+import ViewCompetition from './Components/ViewCompetition';
 // import { FontAwesomeIcon } from "@fortawesome/fontawesome-svg-core";
 
 // const userContext = createContext()
@@ -35,6 +36,8 @@ function App() {
           <Route path='/uploadContent' element={<UploadContent />}></Route>
           <Route path='/competition' element={<Competition />}></Route>
           <Route path='/viewContent/:id' element={<ViewContent />}></Route>
+          <Route path='/viewCompetition/:id' element={<ViewCompetition />}></Route>
+
         </Routes>
         <Footer></Footer>
       </Router>

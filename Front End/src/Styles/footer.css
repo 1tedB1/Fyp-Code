@@ -21,15 +21,43 @@
 }
 
 .footer--emailForm{
+    /* background-color: black; */
     padding: 0px;
     margin: 0;
+    display: flex;
+    justify-content: center;
 }
 
-.footer--emailForm input{
+.footer--emailForm h5{
     width: 70%;
+    display: flex;
+    justify-content: center;
+    /* background-color: ; */
 }
 
 .footer--emailForm button{
-    width: 25%;
+    width: 50%;
+    /* height: auto; */
     border: 1px solid #97989a;
+}
+
+
+@media screen and (max-width: 768px) {
+    .footer--emailForm {
+       display: flex;
+       flex-direction: column;
+    }
+    .footer--emailForm button {
+        width: 50% !important;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .footer--emailForm {
+        display: flex;
+        flex-direction: column;
+     }
+    .footer--emailForm button {
+        width: 50% !important;
+    }
 }

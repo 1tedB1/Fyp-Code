@@ -26,7 +26,8 @@ const feedbackSlice = createSlice({
     initialState: {
         feedbacks: [],
         status: "idle",
-        error: null
+        error: null,
+        uploading: false
     },
     reducers: {
         feedbackAdded: (state, action) => {
@@ -51,9 +52,15 @@ const feedbackSlice = createSlice({
                 state.status = 'failed'
                 state.error = action.error.message
             })
+            .addCase(addFeedback.pending, (state) => {
+                state.uploading = true;
+            })
             .addCase(addFeedback.fulfilled, (state, action) => {
-                state.feedbacks.push(action.payload)
-                console.log("state" , state.feedbacks);
+                // state.feedbacks.push(action.payload)
+                state.uploading = false;
+            })
+            .addCase(addFeedback.rejected, (state) => {
+                state.uploading = false;
             })
     }
     // extraReducers: {

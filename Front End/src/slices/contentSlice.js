@@ -25,6 +25,36 @@ export const createArticle = createAsyncThunk('article/createArticle', async (ar
     }
 })
 
+export const viewArticle = createAsyncThunk('article/viewArticle', async (article) => {
+    // console.log("article ", article);
+    try {
+        const response = await axios.post('http://localhost:4000/api/v1/viewArticle', article)
+        return response.data.message
+    } catch (error) {
+        throw error
+    }
+})
+
+export const likeArticle = createAsyncThunk('article/likeArticle', async (article) => {
+    // console.log("article ", article);
+    try {
+        const response = await axios.post('http://localhost:4000/api/v1/likeArticle', article)
+        return response.data.message
+    } catch (error) {
+        throw error
+    }
+})
+
+export const disLikeArticle = createAsyncThunk('article/disLikeArticle', async (article) => {
+    // console.log("article ", article);
+    try {
+        const response = await axios.post('http://localhost:4000/api/v1/disLikeArticle', article)
+        console.log(response.data);
+        return response.data.message
+    } catch (error) {
+        throw error
+    }
+})
 
 const contentSlice = createSlice({
     name: 'article',
@@ -32,7 +62,8 @@ const contentSlice = createSlice({
         articles: [],
         status: 'idle',
         error: null,
-        selectedArticle: null
+        selectedArticle: null,
+        changeInProgress: false
     },
     reducers: {
         articleAdded: (state, action) => {
@@ -75,13 +106,54 @@ const contentSlice = createSlice({
                 state.error = action.error.message
             })
             .addCase(createArticle.pending, (state) => {
-                
+
             })
-            .addCase(createArticle.fulfilled, (state,action) => {
+            .addCase(createArticle.fulfilled, (state, action) => {
                 // state.articles.push(action.payload)
             })
             .addCase(createArticle.rejected, (state) => {
+
+            })
+            .addCase(viewArticle.pending, (state) => {
+                state.changeInProgress = true
+            })
+            .addCase(viewArticle.fulfilled, (state, action) => {
+                state.changeInProgress = false
+
+            })
+            .addCase(viewArticle.rejected, (state) => {
+                state.changeInProgress = false
+            })
+            .addCase(likeArticle.pending, (state) => {
+                console.log("suded called");
+
+                state.changeInProgress = true
                 
+
+            })
+            .addCase(likeArticle.fulfilled, (state, action) => {
+                console.log("succeded called");
+                state.changeInProgress = false
+
+            })
+            .addCase(likeArticle.rejected, (state) => {
+                console.log("suded done");
+
+                state.changeInProgress = false
+
+            })
+            .addCase(disLikeArticle.pending, (state) => {
+                state.changeInProgress = true
+
+            })
+            .addCase(disLikeArticle.fulfilled, (state, action) => {
+                console.log("succeded called");
+                state.changeInProgress = false
+
+            })
+            .addCase(disLikeArticle.rejected, (state) => {
+                state.changeInProgress = false
+
             })
     }
 

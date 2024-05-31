@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faImage, faMessage, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faClock, faImage, faMessage, faUser } from "@fortawesome/free-solid-svg-icons";
 import { faKey } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
@@ -124,7 +124,7 @@ function Register() {
                         <label htmlFor="dob">تاریخ          پیداش</label>
                         <div className='inputDiv'>
                             <div className='iconDiv'>
-                                <FontAwesomeIcon icon={faImage} className='icon' />
+                                <FontAwesomeIcon icon={faClock} className='icon' />
                             </div>
                             <input
                                 required

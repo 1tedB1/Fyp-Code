@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Select from "react-select";
 import { getAllTags } from '../slices/tagSlice';
@@ -12,7 +12,7 @@ function UploadContent() {
   const [prevPart, setPrevPart] = useState(null)
   const [title, setTitle] = useState("")
   const tagSlice = useSelector(state => state.tag)
-  const articleSlice = useSelector(state => state.content)
+  // const articleSlice = useSelector(state => state.content)
   const dispatch = useDispatch()
   const userSlice = useSelector(state => state.user)
   const [content, setContent] = useState("")
@@ -47,21 +47,24 @@ function UploadContent() {
 
 
 
-  let tags = tagSlice.tags.map((value, index) => {
+  let tags = tagSlice.tags.map((value) => {
     // console.log("id = ", value._id);
     return { value: value._id, label: value.value }
   })
-  const linkNovels = userSlice.loggedInUser.articles.map((value, index) => {
+  const linkNovels = userSlice.loggedInUser.articles.map((value) => {
     return { value: value._id, label: value.title }
   })
 
   const submitArticle = (e) => {
     e.preventDefault()
-
-    // if(title == ""){
-    //   setOpen(true)
-    //   return;
-    // }
+    if (title == "") {
+      setOpen(true)
+      return;
+    }
+    if (content == "") {
+      setOpen(true)
+      return;
+    }
 
     const article = {
       title: title,
@@ -125,7 +128,7 @@ function UploadContent() {
               if (prevState.includes(e.value)) {
                 return prevState;
               }
-              
+
               return [...prevState, e.value]
             })
 

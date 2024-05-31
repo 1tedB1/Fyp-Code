@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 
 const createContent = catchAsync(async (req, res) => {
     console.log(req.body);
-    const { title, content, author, prevPart,tags, nextPart } = req.body;
+    const { title, content, author, prevPart, tags, nextPart } = req.body;
     const newArticle = await ArticleData.create({
         title,
         content,
@@ -50,6 +50,10 @@ module.exports.likeContent = catchAsync(async (req, res) => {
     }
     if (likes.includes(userId)) {
         console.log("already liked");
+        res.status(200).json({
+            success: false,
+            message: "Article already Liked",
+        });
         return
     }
     else {
@@ -57,7 +61,10 @@ module.exports.likeContent = catchAsync(async (req, res) => {
     }
     // article.likes.push(userId);
     await article.save();
-
+    res.status(200).json({
+        success: true,
+        message: "Article liked successfully",
+    });
 })
 
 
@@ -74,6 +81,10 @@ module.exports.disLikeContent = catchAsync(async (req, res) => {
     }
     if (dislikes.includes(userId)) {
         console.log("already disliked");
+        res.status(200).json({
+            success: false,
+            message: "Article already Liked",
+        });
         return
     }
     else {
@@ -81,26 +92,36 @@ module.exports.disLikeContent = catchAsync(async (req, res) => {
     }
     // article.likes.push(userId);
     await article.save();
-
+    res.status(200).json({
+        success: true,
+        message: "Article disliked successfully",
+    });
 })
 
 
 module.exports.viewContent = catchAsync(async (req, res) => {
 
     const { articleId, userId } = req.body;
+    // console.log(req.body);
     // console.log(articleId,"   ",'664ed78989f076f759eb06c4');
     const article = await ArticleData.findById(articleId);
     const views = article.views;
     if (views.includes(userId)) {
         console.log("already viewed");
-        return
+        res.status(200).json({
+            success: false,
+            message: "Article already Liked",
+        });
     }
     else {
         views.push(userId);
     }
     // article.likes.push(userId);
     await article.save();
-
+    res.status(200).json({
+        success: true,
+        message: "Article viewed successfully",
+    });
 })
 
 module.exports.removeContent = catchAsync(async (req, res) => {
@@ -134,7 +155,7 @@ const getAllArticles = catchAsync(async (req, res) => {
         {
             path: 'author',
         }
-    
+
     ).populate(
         {
             path: 'nextPart',
@@ -177,9 +198,9 @@ module.exports.getAllArticles = getAllArticles;
 
 req = {
     body: {
-        title:"dfd",
-        content:"dfdfdf",
-        author:"664e4b9b761ff701be245a1f",
+        title: "dfd",
+        content: "dfdfdf",
+        author: "664e4b9b761ff701be245a1f",
         // prevPart:""
     }
 }

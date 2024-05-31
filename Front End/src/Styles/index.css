@@ -11,11 +11,13 @@
 @import url(./UploadContent.css);
 @import url(./ViewContent.css);
 @import url(./PopUp.css);
+@import url(./ViewCompetition.css);
 /* Custom Font Regular */
+
 @font-face {
   font-family: 'Noto Nastaliq Urdu';
   src: url("../assets/Fonts/NotoNastaliqUrdu-Regular.ttf") format('truetype');
-  font-weight:normal;
+  font-weight: normal;
   font-style: normal;
 }
 
@@ -42,19 +44,43 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+  word-wrap: break-word;
+  /* Ensures long words break */
+  overflow-wrap: break-word;
+  /* Standard property for word breaking */
+  white-space: normal;
+  /* Ensures normal text wrapping */
   /* font-size: large; */
 }
-h1{
-  font-family: 'Noto Nastaliq Urdu', serif; 
+
+h1 {
+  font-family: 'Noto Nastaliq Urdu', serif;
 }
-input{
-  outline:none;
+
+input {
+  outline: none;
   padding: .5%;
   background-color: #EFEFE6;
 }
-body{
+
+body {
   background-color: #F8F9FA;
 }
-button:hover{
+
+button:hover {
   cursor: pointer;
+}
+
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  button {
+    width: 25% !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  button {
+    width: 25% !important;
+  }
 }

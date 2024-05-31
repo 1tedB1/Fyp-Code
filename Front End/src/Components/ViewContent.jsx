@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
-import { articleSelected, getAllArticles } from "../slices/contentSlice";
+import { articleSelected, getAllArticles, viewArticle } from "../slices/contentSlice";
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers, getUser, getUserById } from '../slices/userSlice';
-import { addFeedback } from '../slices/feedbackSlice';
+import feedbackSlice, { addFeedback } from '../slices/feedbackSlice';
+
 
 function ViewContent() {
 
@@ -13,28 +14,44 @@ function ViewContent() {
     const dispatch = useDispatch()
     const contentState = useSelector(state => state.content)
     const userState = useSelector(state => state.user)
-    const [newCommentContent, setNewCommentContent] = useState("اپنی رائیں ہمیں دیں")
+    const [newCommentContent, setNewCommentContent] = useState("")
 
+    const viewed = useRef(false)
 
-    useEffect(() => {
+    const callDispathcers = () => {
         dispatch(getAllArticles())
         dispatch(fetchUsers())
         dispatch(articleSelected(id))
         dispatch(getUser())
+    }
+    useEffect(() => {
+        callDispathcers()
         // console.log(localStorage.getItem("token"));
         // dispatch(fetchUsers())
     }, [])
 
+
     if (contentState.status == "loading" || contentState.status == "idle"
         || userState.status == "loading" || userState.status == "loggedOut"
+        || feedbackSlice.uploading
     ) {
         return <h1>Loading...</h1>;
     }
 
+    if (!viewed.current) {
+        dispatch(viewArticle({
+            userId: userState.userId,
+            articleId: contentState.articles[id]._id
+        }))
+        viewed.current = true
+        callDispathcers()
+    }
+
+
     // let title="", content="", authName="", comments="";
     const article = contentState.articles[id]
     // console.dir(article)
-    const { title, content, comments } = article
+    const { title, content, comments, likes } = article
     // console.log("author ", article.author);
     const authName = userState.users.find(user => user._id == article.author._id).name
 
@@ -80,12 +97,14 @@ function ViewContent() {
         }
         setNewCommentContent(e.target.children[0].innerText)
         let content = newCommentContent;
-        console.log("to", localStorage.getItem("token"));
-        console.log(userState);
+        // console.log("to", localStorage.getItem("token"));
+        // console.log(userState);
         let owner = userState.userId;
         let targetContent = article._id;
         // console.log("content = ", content, "owner = ", owner, "targetContent = ", targetContent);
         dispatch(addFeedback({ content, owner, targetContent }))
+        while(feedbackSlice.uploading){console.log("uploading...");}
+        callDispathcers()
     }
 
     return (
@@ -113,25 +132,15 @@ function ViewContent() {
                         className='comment_form'
                         onSubmit={addComment}
                     >
-                        <span
+                        <textarea
+                            placeholder='اپنی رائیں ہمیں دیں'
                             onChange={(e) => {
-                                console.log(e);
+                                setNewCommentContent(e.target.value)
                             }}
-                            contentEditable
                             className='written_comment'
-                            onClick={(e) => {
-                                let checkText = e.target.innerText;
-                                if (checkText == "اپنی رائیں ہمیں دیں") {
-                                    e.target.innerText = ""
-                                }
-
-                                setNewCommentContent(checkText)
-
-
-                            }}
+                            value={newCommentContent}
                         >
-                            {newCommentContent}
-                        </span>
+                        </textarea>
                         <button
                             className="comment_button"
                             type="submit"
@@ -139,7 +148,7 @@ function ViewContent() {
                     </form>
                     <p className='story_likes'>
                         <FontAwesomeIcon icon={faThumbsUp} className='searchIcon' />
-                        21، لایکس</p>
+                        {likes.length} لایکس</p>
                 </div>
                 <div className='posted_comments'>
                     {renderComments()}

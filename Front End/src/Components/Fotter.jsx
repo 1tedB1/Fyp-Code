@@ -1,7 +1,8 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 function Fotter() {
+    const navigate = useNavigate()
     return (
         <>
             <footer className='footer'>
@@ -13,25 +14,29 @@ function Fotter() {
                         <NavLink className={"navlink"} to="/competition">مقابلہ</NavLink>
                     </h4>
                     <h4 className='footer--item'>
-                    {/* <NavLink className={"navlink"} to="/competition">نثر</NavLink>        */}
+                        {/* <NavLink className={"navlink"} to="/competition">نثر</NavLink>        */}
                     </h4>
                     <h4 className='footer--item'>
-                    <NavLink className={"navlink"} to="/hompepage">بلاگ</NavLink>
+                        <NavLink className={"navlink"} to="/hompepage">بلاگ</NavLink>
                     </h4>
                     <h4 className='footer--item'>
-                    <NavLink className={"navlink"} to="/aboutus">ہمیں جانیں</NavLink>
-                         
-                        
+                        <NavLink className={"navlink"} to="/aboutus">ہمیں جانیں</NavLink>
+
+
                     </h4>
                 </div>
                 <div className='secondSection'>
-                    <img className="footer--logo" src="src\assets\logo.png" alt="" width='10px' />
-                    <h4 className='footer--item'>
-                        انتظار کس بات کا؟ آئیں ہمیں جوائن کریں
-                    </h4>
+
+
                     <form action="" className='footer--emailForm emailForm'>
-                        <input type="text" placeholder='اپنا ای میل درج کریں۔' className='emailInput' />
-                        <button type="submit" className='fotter--emailButton emailButton'>شروع کریں
+                        <h5 className='footer--item'>
+                            انتظار کس بات کا؟ آئیں ہمیں جوائن کریں
+                        </h5>
+                        {/* <input type="text" placeholder='اپنا ای میل درج کریں۔' className='emailInput' /> */}
+                        <button type="submit" onClick={e=>{
+                            e.preventDefault()
+                            navigate('/register')
+                        }} className='fotter--emailButton emailButton'>شامل ہوں
                         </button>
                     </form>
                 </div>

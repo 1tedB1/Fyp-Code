@@ -10,3 +10,134 @@
     --bg-200: #ebebeb;
     --bg-300: #c2c2c2;
 }
+
+@media (max-width: 768px) {
+    :root {
+        --font-size-h1: 2rem;
+        --font-size-h2: 1.75rem;
+        --font-size-h3: 1.5rem;
+        --font-size-h4: 1.25rem;
+        --font-size-h5: 1rem;
+        --font-size-h6: 0.875rem;
+        --font-size-p: 0.875rem;
+        --font-size-small: 0.75rem;
+        --font-size-link: 0.875rem;
+        --font-size-button: 0.875rem;
+        --font-size-caption: 0.75rem;
+        --font-size-lead: 1rem;
+    }
+}
+
+:root {
+    /* Base font size for the body */
+    --font-size-base: 1rem;
+    /* 16px */
+
+    /* Headings */
+    --font-size-h1: 2.5rem;
+    /* 40px */
+    --font-size-h2: 2rem;
+    /* 32px */
+    --font-size-h3: 1.75rem;
+    /* 28px */
+    --font-size-h4: 1.5rem;
+    /* 24px */
+    --font-size-h5: 1.25rem;
+    /* 20px */
+    --font-size-h6: 1rem;
+    /* 16px */
+
+    /* Paragraph */
+    --font-size-p: 1rem;
+    /* 16px */
+
+    /* Small text */
+    --font-size-small: 0.875rem;
+    /* 14px */
+
+    /* Links */
+    --font-size-link: 1rem;
+    /* 16px */
+
+    /* Buttons */
+    --font-size-button: 1rem;
+    /* 16px */
+
+    /* Other text components */
+    --font-size-caption: 0.75rem;
+    /* 12px */
+    --font-size-lead: 1.25rem;
+    /* 20px */
+}
+
+/* Applying the variables */
+body {
+    font-size: var(--font-size-base);
+}
+
+h1 {
+    font-size: var(--font-size-h1);
+}
+
+h2 {
+    font-size: var(--font-size-h2);
+}
+
+h3 {
+    font-size: var(--font-size-h3);
+}
+
+h4 {
+    font-size: var(--font-size-h4);
+}
+
+h5 {
+    font-size: var(--font-size-h5);
+}
+
+h6 {
+    font-size: var(--font-size-h6);
+}
+
+p {
+    font-size: var(--font-size-p);
+}
+
+small {
+    font-size: var(--font-size-small);
+}
+
+a {
+    font-size: var(--font-size-link);
+}
+
+button {
+    font-size: var(--font-size-button);
+}
+
+.caption {
+    font-size: var(--font-size-caption);
+}
+
+.lead {
+    font-size: var(--font-size-lead);
+}
+
+
+
+@media (max-width: 480px) {
+    :root {
+        --font-size-h1: 1.75rem;
+        --font-size-h2: 1.5rem;
+        --font-size-h3: 1.25rem;
+        --font-size-h4: 1rem;
+        --font-size-h5: 0.875rem;
+        --font-size-h6: 0.75rem;
+        --font-size-p: 0.75rem;
+        --font-size-small: 0.75rem;
+        --font-size-link: 0.75rem;
+        --font-size-button: 0.75rem;
+        --font-size-caption: 0.75rem;
+        --font-size-lead: 0.875rem;
+    }
+}

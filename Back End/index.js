@@ -22,11 +22,15 @@ const userRoute = require('./routes/user.route')
 const contentRoute = require('./routes/article.route')
 const feedbackRoute = require('./routes/feedback.route')
 const tagRoute = require('./routes/tag.route')
+const compRoute = require('./routes/competition.route')
+
 
 app.use('/api/v1', userRoute);
 app.use('/api/v1', contentRoute);
 app.use('/api/v1', feedbackRoute);
 app.use('/api/v1', tagRoute);
+app.use('/api/v1', compRoute);
+
 
 //testing purpose 
 // console.log(user);

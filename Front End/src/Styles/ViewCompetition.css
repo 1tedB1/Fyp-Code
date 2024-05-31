@@ -1,0 +1,108 @@
+.viewcomp {
+    display: flex;
+    flex-direction: column;
+    margin: 5% 15%;
+
+    text-align: justify;
+}
+
+.viewComp-CompTitle>h3 {
+    display: flex;
+    /* width: 3%;
+    background-color: black; */
+    height: auto;
+}
+
+.viewcomp-rest {
+    width: 80%;
+    margin: auto;
+    padding: 2%;
+    margin-top: 2%;
+    border: 2.5px solid #DFE4E6;
+    border-radius: 10px;
+}
+
+.viewcomp-rest * {
+    /* Add your styles here */
+}
+
+.viewComp-YourUploadedStoryDiv {
+    /* Add your styles here */
+}
+
+.viewComp-YourUploadedStory {
+    list-style-type: none;
+}
+
+.viewComp-CompUpload {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.viewComp-Select {
+    width: 70%;
+    margin: 1%;
+}
+
+.viewComp-saveButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F8F9FA;
+    border: 1px solid #DFE4E6;
+    border-radius: 5px;
+    padding: 1%;
+    margin: 1%;
+    width: 20%;
+    height: 2rem;
+    margin-left: 40%;
+}
+
+/* Media Query for screens smaller than 768px */
+@media (max-width: 767px) {
+    .viewcomp {
+        margin: 5% 15%;
+
+
+    }
+
+    .viewcomp-rest {
+        width: 90%;
+        padding: 1%;
+        margin-top: 1%;
+    }
+
+    .viewComp-saveButton {
+        width: 30%;
+        margin-left: 35%;
+    }
+    .viewComp-CompUpload {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* Media Query for screens larger than 1200px */
+@media (min-width: 1200px) {
+    .viewcomp {
+        margin: 5% 15%;
+
+
+    }
+
+    .viewcomp-rest {
+        width: 70%;
+        padding: 3%;
+        margin-top: 3%;
+    }
+
+    .viewComp-saveButton {
+        width: 15%;
+        margin-left: 42.5%;
+    }
+}

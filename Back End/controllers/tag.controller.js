@@ -1,10 +1,10 @@
 const catchAsync = require("../middlewares/catchAsync");
 const Tag = require('../models/tag.model')
 
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/Andaz-E-Bayan', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.Promise = global.Promise;
+// mongoose.connect('mongodb://localhost:27017/Andaz-E-Bayan', { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.Promise = global.Promise;
 
 const createTag = catchAsync(async (req, res) => {
     const { value } = req.body;
