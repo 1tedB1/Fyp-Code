@@ -21,6 +21,7 @@ export const fetchUsers = createAsyncThunk("user/fetchUsers", async () => {
 export const loginUser = createAsyncThunk("user/loginUser", async ({ email, password }) => {
     try {
         const response = await axios.post("http://localhost:4000/api/v1/login", { email, password })
+        // console.log("on log in ", response.data);
         if (response.data.success) {
             localStorage.setItem("token", response.data.token)
             return response.data
@@ -36,6 +37,7 @@ export const loginUser = createAsyncThunk("user/loginUser", async ({ email, pass
 export const getUser = createAsyncThunk("user/getUser", async () => {
     try {
         // console.log("hererere")
+        if(!localStorage.getItem("token")) throw new Error("No token found")
         const token = localStorage.getItem("token")
         const response = await axios.post("http://localhost:4000/api/v1/getUser", { token })
         // console.log("res", response);
@@ -92,6 +94,7 @@ const userSlice = createSlice({
                 const { id, token } = action.payload
                 state.userId = id
                 state.token = token
+                // localStorage.setItem("token", token)
                 state.isAuthenticated = true;
                 state.status = 'succeeded'
                 state.loggedInUser = state.users.find(user => user._id == id);
@@ -101,7 +104,7 @@ const userSlice = createSlice({
                 state.userId = ""
                 state.token = ""
                 state.isAuthenticated = false;
-                state.status = 'loggedOut'
+                state.status = 'failedLogin'
                 state.loggedInUser = null;
             })
             .addCase(getUser.pending, (state) => {

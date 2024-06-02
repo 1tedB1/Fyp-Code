@@ -1,19 +1,21 @@
-.loginHeading{
+.loginHeading {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 2% 0;
 }
-.loginHeading img{
+
+.loginHeading img {
     width: 6%;
 }
-.loginHeading h1{
+
+.loginHeading h1 {
     margin: 0;
     /* font-size:1.6rem; */
 }
-.loginFormDiv{
-    
+
+.loginFormDiv {
     background-color: #f3f3e7;
     border-radius: 5px;
     width: 50%;
@@ -24,17 +26,17 @@
     color: #6b6b6c;
 }
 
-.loginForm{
-    display: flex;
-    flex-direction: column;
-    
-}
-.loginForm>div{
+.loginForm {
     display: flex;
     flex-direction: column;
 }
 
-.loginFormDiv input{
+.loginForm>div {
+    display: flex;
+    flex-direction: column;
+}
+
+.loginFormDiv input {
     border: none;
     width: 95%;
     padding-right: 2%;
@@ -43,7 +45,7 @@
     /* border-radius: 5px; */
 }
 
-.loginButton{
+.loginButton {
     margin: 3% 40%;
     width: 20%;
     border-radius: 10px;
@@ -51,7 +53,8 @@
     border: none;
     /* margin-right: 40%; */
 }
-.inputDiv{
+
+.inputDiv {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -60,12 +63,38 @@
     border: 1px solid #6b6b6c;
     /* padding: 1%; */
 }
-.inputDiv .iconDiv{
+
+.inputDiv .iconDiv {
     /* margin: 2%; */
     padding: 1%;
-    width: 5%;
+    /* width: 5%; */
     border-left: 1px solid #a7a7a9;
     display: flex;
     align-items: center;
     height: 100%;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+    .loginFormDiv {
+        width: 80%;
+        margin: 5% 10%;
+    }
+
+    .loginButton {
+        margin: 3% 30%;
+    }
+    
+}
+
+@media screen and (max-width: 480px) {
+    .loginFormDiv {
+        width: 90%;
+        margin: 5% 5%;
+    }
+
+    .loginButton {
+        margin: 3% 20%;
+    }
+   
 }

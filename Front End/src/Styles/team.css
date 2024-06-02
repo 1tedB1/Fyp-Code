@@ -1,0 +1,79 @@
+.team-intro-div {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: end; */
+}
+
+.team-intro-div h4 {
+    width: 100%;
+    align-content: start;
+    color: black !important;
+    font-size: var(--font-size-h4);
+}
+
+.team-intro-div a{
+    width: 100% !important;
+}
+
+.team-intro-div ul {
+    display: flex;
+    width: 100%;
+    /* align-content: start; */
+}
+
+a .teamTitle{
+    font-weight: bolder !important;
+    /* background-color: black; */
+    width: 100% !important;
+    align-content: start;
+    color: black !important;
+    font-size: var(--font-size-h2) !important; 
+}
+
+.team-div {
+    margin-bottom: 1%;
+}
+
+/* Media Query for screens smaller than 768px */
+@media (max-width: 767px) {
+    .team-intro-div {
+        /* Add your responsive styles here */
+        justify-content: center;
+        width: 100%;
+    }
+
+    .team-intro-div h4 {
+        /* Add your responsive styles here */
+    }
+
+    .team-intro-div ul {
+        /* Add your responsive styles here */
+    }
+
+    .team-div {
+        /* Add your responsive styles here */
+    }
+    .team-buttons{
+        /* background-color: black; */
+        width: 100% !important;
+    }
+}
+
+/* Media Query for screens larger than 768px */
+@media (min-width: 768px) {
+    .team-intro-div {
+        /* Add your responsive styles here */
+    }
+
+    .team-intro-div h4 {
+        /* Add your responsive styles here */
+    }
+
+    .team-intro-div ul {
+        /* Add your responsive styles here */
+    }
+
+    .team-div {
+        /* Add your responsive styles here */
+    }
+}

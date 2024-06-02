@@ -55,6 +55,29 @@ export const disLikeArticle = createAsyncThunk('article/disLikeArticle', async (
         throw error
     }
 })
+export const deleteContent = createAsyncThunk('article/deleteContent', async (articleId) => {
+    try {
+        console.log(articleId);
+        const response = await axios.post('http://localhost:4000/api/v1/removeArticle', { articleId })
+        return response.data.message
+
+    } catch (error) {
+        console.log(error);
+        
+        throw error
+    }
+
+})
+
+export const updateArticle = createAsyncThunk('article/updateArticle', async (article) => {
+    try {
+        const response = await axios.put('http://localhost:4000/api/v1/updateArticle', article)
+        return response.data.data
+    } catch (error) {
+        console.log(error);
+        throw new Error(error.message)
+    }
+})
 
 const contentSlice = createSlice({
     name: 'article',
@@ -77,12 +100,13 @@ const contentSlice = createSlice({
                 existingArticle.content = content
             }
         },
-        articleDeleted: (state, action) => {
-            const { id } = action.payload
-            state.articles = state.articles.filter(article => article.id !== id)
-        },
+        
         articleSelected: (state, action) => {
             state.selectedArticle = action.payload
+
+        },
+        removeSelectedArticle: (state, action) =>{
+            state.selectedArticle = null;
         }
 
     },
@@ -155,11 +179,20 @@ const contentSlice = createSlice({
                 state.changeInProgress = false
 
             })
+            .addCase(deleteContent.pending, (state)=>{
+                state.status = "deleting"
+            })
+            .addCase(deleteContent.rejected,(state)=>{
+                state.status = "rejected"
+            })
+            .addCase(deleteContent.fulfilled, (state)=>{
+                state.status = "succeeded"
+            })
     }
 
 })
 
-export const { articleAdded, articleUpdated, articleDeleted, articleSelected } = contentSlice.actions
+export const { articleAdded, articleUpdated, articleSelected } = contentSlice.actions
 export default contentSlice.reducer
 
 // console.log(2);

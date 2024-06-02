@@ -1,16 +1,20 @@
 import React from 'react'
-import Card  from "./Card";
+import Card from "./Card";
 function Cards() {
     return (
         <div className="cards">
-            <Card imgPath={'src\\assets\\logo.png'}
-                text={'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci sequi minima ullam quis quibusdam omnis aperiam? Nostrum eum aliquam perferendis ratione, a repudiandae. Accusamus beatae voluptas, velit dolore accusantium sint?'}>
+            <Card imgPath={'src\\assets\\book.jpg'}
+            heading = "اردو افسانے"
+
+                text={'اردو افسانے ادب کی جادوئی دنیا ہیں جو قاری کو اپنے سحر میں جکڑ لیتے ہیں۔ ان میں زندگی کی حقیقتیں، انسانیت کے جذبات اور معاشرتی مسائل کو نہایت خوبصورتی اور باریکی سے بیان کیا گیا ہے۔ اردو افسانہ نگاروں کی قلم سے نکلنے والی تحریریں دل کو چھو لینے والی اور فکر انگیز ہوتی ہیں۔ ہر افسانہ ایک الگ کہانی سناتا ہے اور قاری کو مختلف جذبات کی دنیا میں لے جاتا ہے۔   '}>
             </Card>
-            <Card imgPath={'src\\assets\\logo.png'}
-                text={'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci sequi minima ullam quis quibusdam omnis aperiam? Nostrum eum aliquam perferendis ratione, a repudiandae. Accusamus beatae voluptas, velit dolore accusantium sint?'}>
+            <Card imgPath={'src\\assets\\book.jpg'}
+                heading="اردو شاعری"
+                text={'اردو شاعری ادب کا ایک لازوال اور خوبصورت خزانہ ہے، جو دلوں کی دھڑکنوں اور جذبات کی گہرائیوں کو نہایت خوبصورتی سے بیان کرتی ہے۔ اس کی سحر انگیزی اور دلنشینی قاری کو ایک خوابناک دنیا میں لے جاتی ہے جہاں الفاظ محبت، غم، خوشی اور حُسن کی تصویر کشی کرتے ہیں۔ اردو شعراء کی تخلیقات میں الفاظ موتیوں کی طرح جڑے ہوتے ہیں، جن میں ہر لفظ اپنی جگہ ایک مکمل کہانی بیان کرتا ہے۔'}>
             </Card>
-            <Card imgPath={'src\\assets\\logo.png'}
-                text={'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci sequi minima ullam quis quibusdam omnis aperiam? Nostrum eum aliquam perferendis ratione, a repudiandae. Accusamus beatae voluptas, velit dolore accusantium sint?'}>
+            <Card imgPath={'src\\assets\\book.jpg'}
+                heading="مقابلہ"
+                text={'مقابلہ انسانی ترقی اور کامیابی کا بنیادی عنصر ہے۔ یہ انسان کو بہتر سے بہتر کارکردگی دکھانے کے لیے متحرک کرتی ہے۔ مسابقت کے ذریعے انسان اپنی صلاحیتوں کو نکھارتا اور  انہیں مزید بہتر بنانے کی کوشش کرتا ہےانہیں مزید بہتر بنانے کی کوشش کرتا ہےانہیں مزید بہتر بنانے کی کوشش کرتا ہےانہیں مزید بہتر بنانے کی کوشش کرتا ہےانہیں مزید بہتر بنانے کی کوشش کرتا ہےانہیں مزید بہتر بنانے کی کوشش کرتا ہے'}>
 
             </Card>
 

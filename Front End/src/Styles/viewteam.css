@@ -1,0 +1,97 @@
+.viewTeam {
+    margin: 4% 10%;
+}
+
+.view-team-first-div {
+    padding: 1% 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 1px solid black; */
+    border: 2.5px solid #DFE4E6;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+.main-profile-firstDiv:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.view-team-first-div div {
+    width: 50%;
+}
+
+.view-team-first-div ul {
+    /* width: 50%; */
+    display: flex;
+
+}
+
+.memberDiv * {
+    height: 100%;
+    font-size: var(--font-size-h4);
+}
+
+.memberDiv {
+    /* background-color: black; */
+    display: flex;
+    align-items: center;
+    /* justify-c: center; */
+}
+
+
+.view-team-second-div {
+    padding: 1% 2%;
+    margin: 2% 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 1px solid black; */
+    border: 2.5px solid #DFE4E6;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+.select-tag {
+    /* background-color: black; */
+    /* border: 1px solid black; */
+    margin: 2% auto !important;
+    /* margin-top: 500px; */
+    margin: auto;
+    width: 50%;
+}
+
+.shared_work_form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.shared_work_form input {
+    margin: 1% 0;
+    width: 40%;
+    padding: 1% 2%;
+    /* border: 1px solid #DFE4E6; */
+    border-radius: 5px;
+}
+
+.shared_work_form textarea {
+    margin: 1% 0;
+    /* width: 40%; */
+    height: 40rem;
+    padding: 1% 2%;
+    /* border: 1px solid #DFE4E6; */
+    border-radius: 5px;
+}
+
+.shared_work_form button {
+    margin: 1% auto;
+    width: 20%;
+    /* height: auto; */
+    padding: 1% 2%;
+    border: none;
+    background-color: #2D9CDB;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}

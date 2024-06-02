@@ -35,3 +35,14 @@
         width: 30%;
     }
 }
+
+@media screen and (min-width: 1200px) {
+    .popup-content {
+        width: 30%;
+        height: 25%;
+    }
+    
+    .popup-content > button {
+        width: 10%;
+    }
+}

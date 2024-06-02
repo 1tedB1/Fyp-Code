@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import { getAllArticles, likeArticle, disLikeArticle } from '../slices/contentSlice'
 import { getAllFeedBack } from '../slices/feedbackSlice';
 import { fetchUsers, getUser } from '../slices/userSlice';
+import Article from './Article'
 function HomePage() {
 
   const dispatch = useDispatch()
@@ -29,7 +30,7 @@ function HomePage() {
 
 
   if (contentState.status == "loading" || contentState.status == "idle"
-    || userState.status == "loading" || userState.status == "loggedOut"
+    || userState.status == "loading"
   ) {
     return <h1>Loading...</h1>;
   }
@@ -41,6 +42,9 @@ function HomePage() {
     return contentState.articles.map((article, index) => {
       return (
         <Article
+          callDispathcers={callDispathcers}
+          contentState={contentState}
+          userState={userState}
           key={index}
           title={article.title}
           id={index}
@@ -48,7 +52,9 @@ function HomePage() {
           likes={article.likes}
           dislikes={article.dislikes}
           comments={article.comments}
-          views={article.views}>
+          views={article.views}
+          cDate={article.createdAt}
+        >
         </Article>
       )
     })
@@ -57,82 +63,6 @@ function HomePage() {
 
 
   // A differen compnent (child)
-  function Article({ title, cDate, content, likes, dislikes, comments, views, id }) {
-    // likes.forEach(element => {
-    //   console.log(element);
-    // });
-    const [likeCount, setLikeContent] = useState(likes.length)
-    const [disLikeCount, setDisLikeCount] = useState(dislikes.length)
-    const [liked, setLiked] = useState(likes.find(user => user._id == userState.userId))
-    const [disLiked, setDisLiked] = useState(dislikes.find(user => user._id == userState.userId))
-    const [classChange, setClassChange] = useState(`${liked?'content_button_selected':''}`)
-
-    if (title == null) {
-      title = "حسینوں پہ ہم کو بروسہ نہیں ہے"
-    }
-    // console.log(id);
-
-    return (
-      <div className='article '>
-        <NavLink to={`/viewcontent/${id}`} className={"navlink"} >
-          <h2 className='article_heading'>{title}</h2>
-
-          <p className='date'>{cDate}</p>
-          <p className='article_content'>{content.slice(0, 450) + " ......"}</p>
-        </NavLink>
-        <div className="article_icons">
-          <button
-            className={`article_icon ${classChange}`}
-            onClick={() => {
-              if (liked || contentState.changeInProgress == true) {
-                return;
-              }
-              setClassChange('content_button_selected')
-              setLiked(true)
-              dispatch(likeArticle({ articleId: contentState.articles[id]._id, userId: userState.userId }))
-              
-              console.log(contentState);
-              while (contentState.changeInProgress == true) { console.log("waiting") }
-              callDispathcers()
-              if (disLiked == true) setDisLiked(false)
-              setLiked(true)
-              setLikeContent(likeCount + 1)
-            }}
-          >
-            <FontAwesomeIcon className={'article_icon_img'}
-              icon={faThumbsUp} />
-            <p>لائک{`(${likeCount})`}</p>
-          </button>
-          <button
-            className={`article_icon ${(disLiked) ? 'content_button_selected' : ''}`}
-            onClick={() => {
-              if ((dislikes.find(user => user._id == userState.userId)) || contentState.changeInProgress == true) {
-                return;
-              }
-              dispatch(disLikeArticle({ articleId: contentState.articles[id]._id, userId: userState.userId }))
-              // console.log("hi", contentState.changeInProgress);
-              // while (contentState.changeInProgress == true) { console.log("waiting"); }
-              callDispathcers()
-              if (liked == true) setLiked(false)
-              setDisLiked(true)
-              setDisLikeCount(disLikeCount + 1)
-            }}>
-
-            <FontAwesomeIcon className={'article_icon_img'}
-              icon={faThumbsDown} />
-            <p>ڈس لائک{`(${dislikes.length})`}</p>
-          </button>
-          <button
-
-            className='article_icon'>
-            <FontAwesomeIcon className={'article_icon_img'}
-              icon={faChartBar} />
-            <p>{`(${views.length})`}</p>
-          </button>
-        </div>
-      </div>
-    )
-  }
 
 
   // Main component

@@ -21,11 +21,11 @@ function Login() {
             isFirstRender.current = false;
             return; // Skip the first render
         }
-        if (User.isAuthenticated === true) {
+        if (User.loggedInUser) {
             navigate('/homepage')
             // console.log("log")
         }
-        else if(User.status === "failed") {
+        else  if(User.status == "failedLogin"){
             setopacityL(1)
         }
     }, [User])

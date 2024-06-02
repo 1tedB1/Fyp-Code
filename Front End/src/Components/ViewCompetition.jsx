@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addEntry, getAllCompetitions } from '../slices/competitionSlice'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fetchUsers, getUser } from '../slices/userSlice';
 import Select from "react-select";
@@ -15,6 +15,7 @@ function ViewCompetition() {
     const competitionState = useSelector(state => state.competition)
     const [popUpMessage, setPopUpMessage] = useState("")
     const [open, setOpen] = useState(false);
+    const navigate = useNavigate()
     const closeModal = () => setOpen(false);
     // const contentState = useSelector(state => state.content)
     const userState = useSelector(state => state.user)
@@ -31,9 +32,11 @@ function ViewCompetition() {
 
     }, [])
 
-    if (competitionState.status === "loading" || userState.status === "loading" || userState.status == "loggedOut") {
+    
+    if (competitionState.status === "loading" || userState.status === "loading" ) {
         return <h1>Loading...</h1>
     }
+   
     // const [judges, setJudges] = useState(competitionState.competitions[id].judges)
     // console.log(competitionState.status);
     const competition = competitionState.competitions[id]
@@ -52,7 +55,8 @@ function ViewCompetition() {
         //     comp => comp._id == selectedEntry._id));
         if (competitionState.competitions[id].entries.find(
             comp => comp._id == selectedEntry._id)) {
-            alert("already uploaded")
+                setPopUpMessage("already uploaded")
+                setOpen(true)
             return
         }
         // dispatch(addEntry({ competitionId: competition._id, entryId: selectedEntry._id,participantId:userState.loggedInUser._id }))
@@ -84,7 +88,7 @@ function ViewCompetition() {
                     </ul>
                 </div>
                 <hr style={{ height: '50%', width: '50%', margin: 'auto', marginTop: '3%' }} />
-<br />
+                <br />
                 <div className="viewComp-CompUpload">
                     <Select
                         className='viewComp-Select'

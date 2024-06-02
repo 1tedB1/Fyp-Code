@@ -8,14 +8,14 @@ const teamSchema = new mongoose.Schema({
 
     members: [{
         type: Schema.Types.ObjectId,
-        ref: 'userData',
+        ref: 'UserData',
         required: true
     }],
     sharedWork: [{
-        type: Schema.Types.ObjectId,
-        ref: 'ArticleData',
+        content:String,
+        title:String,
     }],
-    teamName: {
+    name: {
         type: String,
         required: true
     },

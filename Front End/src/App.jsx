@@ -14,6 +14,11 @@ import Test from './Components/Test';
 import Competition from './Components/Competition';
 import ViewContent from './Components/ViewContent';
 import ViewCompetition from './Components/ViewCompetition';
+import MainProfile from './Components/MainProfile';
+import Teams from './Components/Teams';
+import ViewTeam from './Components/ViewTeam';
+import CreateTeam from './Components/CreateTeam';
+import EditProfile from './Components/EditProfile';
 // import { FontAwesomeIcon } from "@fortawesome/fontawesome-svg-core";
 
 // const userContext = createContext()
@@ -37,7 +42,11 @@ function App() {
           <Route path='/competition' element={<Competition />}></Route>
           <Route path='/viewContent/:id' element={<ViewContent />}></Route>
           <Route path='/viewCompetition/:id' element={<ViewCompetition />}></Route>
-
+          <Route path='/mainProfile' element={<MainProfile />}></Route>
+          <Route path='/teams' element={<Teams />}></Route>
+          <Route path='/viewTeam/:id' element={<ViewTeam />}></Route>
+          <Route path='/createTeam' element={<CreateTeam />}></Route> 
+          <Route path='/editProfile' element = {<EditProfile/>}></Route>
         </Routes>
         <Footer></Footer>
       </Router>

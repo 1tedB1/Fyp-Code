@@ -1,19 +1,31 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCompetitions } from '../slices/competitionSlice';
 import { useNavigate } from 'react-router-dom';
+import { fetchUsers, getUser } from '../slices/userSlice';
 
 function Competition() {
 
     const dispatch = useDispatch()
     const competitionState = useSelector(state => state.competition)
     const navigate = useNavigate()
+    const userState = useSelector(state => state.user)
 
-    useEffect(() => {
+
+    const callDispathcers = () => {
+        dispatch(fetchUsers())
+        dispatch(getUser())
         dispatch(getAllCompetitions())
+    }
+    useEffect(() => {
+        callDispathcers()
+        // console.log(localStorage.getItem("token"));
+        // dispatch(fetchUsers())
     }, [])
 
-    if (competitionState.status === "loading") {
+    
+
+    if (competitionState.status === "loading" || userState.status == "loading") {
         return <h1>Loading...</h1>
     }
 
@@ -22,8 +34,8 @@ function Competition() {
 
     function CompetitionEntry({ name, status, tags, id }) {
         // console.log(name);
-        console.log("here");
-        console.log("name = ", name, "Status = ", status, "tags = ", tags);
+        // console.log("here");
+        // console.log("name = ", name, "Status = ", status, "tags = ", tags);
 
         return (
             <div className="competition_entry">
@@ -43,7 +55,11 @@ function Competition() {
                     </div>
                     <button className='competition_entry_submit'
                         onClick={(e) => {
-                            navigate(`/viewCompetition/${id}`)
+                            console.log(userState.loggedInUser);
+                            if(userState.loggedInUser)
+                              navigate(`/viewCompetition/${id}`)
+                            else
+                                alert("You need to log in")
                         }}>
                         کہانی جمع کروائیں
                     </button>

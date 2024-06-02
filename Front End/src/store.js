@@ -5,6 +5,7 @@ import contentSlice from "./slices/contentSlice";
 import feedbackSlice from "./slices/feedbackSlice";
 import tagSlice from "./slices/tagSlice"
 import competitionSlice from "./slices/competitionSlice";
+import teamSlice from "./slices/teamSlice";
 
 
 
@@ -17,7 +18,8 @@ const store = configureStore({
         content: contentSlice,
         feedback: feedbackSlice,
         tag:tagSlice,
-        competition: competitionSlice
+        competition: competitionSlice,
+        team: teamSlice
     }
 })
 

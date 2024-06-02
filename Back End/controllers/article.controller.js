@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 // mongoose.Promise = global.Promise;
 
 const createContent = catchAsync(async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const { title, content, author, prevPart, tags, nextPart } = req.body;
     const newArticle = await ArticleData.create({
         title,
@@ -101,13 +101,14 @@ module.exports.disLikeContent = catchAsync(async (req, res) => {
 
 module.exports.viewContent = catchAsync(async (req, res) => {
 
+    // console.log(req);
     const { articleId, userId } = req.body;
     // console.log(req.body);
     // console.log(articleId,"   ",'664ed78989f076f759eb06c4');
     const article = await ArticleData.findById(articleId);
     const views = article.views;
     if (views.includes(userId)) {
-        console.log("already viewed");
+        // console.log("already viewed");
         res.status(200).json({
             success: false,
             message: "Article already Liked",
@@ -115,20 +116,29 @@ module.exports.viewContent = catchAsync(async (req, res) => {
     }
     else {
         views.push(userId);
+        await article.save();
+        res.status(200).json({
+            success: true,
+            message: "Article viewed successfully",
+        });
     }
     // article.likes.push(userId);
-    await article.save();
-    res.status(200).json({
-        success: true,
-        message: "Article viewed successfully",
-    });
+
 })
 
 module.exports.removeContent = catchAsync(async (req, res) => {
 
     const { articleId } = req.body;
+    
+    console.log("id", articleId);
     // console.log(articleId,"   ",'664ed78989f076f759eb06c4');
     const article = await ArticleData.findById(articleId)
+    const author = await User.findById(article.author._id)
+    //remove the current article from the user
+    author.articles = author.articles.filter((id) => id != articleId)
+    await author.save();
+
+    // console.log(article);
     const prevPart = article.prevPart;
     const nextPart = article.nextPart;
     if (prevPart) {
@@ -139,15 +149,32 @@ module.exports.removeContent = catchAsync(async (req, res) => {
             nextPartArticle.prevPart = prevPart;
             await nextPartArticle.save();
         }
+        else {
+            prevPartArticle.nextPart = null;
+        }
         await prevPartArticle.save();
     }
     else if (nextPart) {
         const nextPartArticle = await ArticleData.findById(nextPart);
-        nextPartArticle.prevPart = null;
-        await nextPartArticle.save();
+        if (nextPartArticle == null) {
+
+        }
+
+        if (prevPart) {
+            const prevPartArticle = await ArticleData.findById(prev);
+            prevPartArticle.nextPart = nextPart;
+            nextPartArticle.prevPart = prevPart;
+            await prevPart.save();
+        }
+        else
+            if (nextPartArticle != null)
+                nextPartArticle.prevPart = null;
+        if (nextPartArticle)
+            await nextPartArticle.save();
 
     }
-    await article.remove();
+    console.log("removed");
+    await ArticleData.findByIdAndDelete(articleId)
 })
 
 const getAllArticles = catchAsync(async (req, res) => {
@@ -194,6 +221,52 @@ const getAllArticles = catchAsync(async (req, res) => {
 
 module.exports.getAllArticles = getAllArticles;
 
+const updateArticle = catchAsync(async (req, res) => {
+    console.log("called");
+    console.log(req.body);
+    const { _id, title, content, author, prevPart, tags, nextPart } = req.body;
+    const article = await ArticleData.findById(_id)
+    // console.log(article);
+    console.log("hi");
+    article.title = title;
+    article.content = content;
+    article.author = author;
+    article.prevPart = prevPart;
+    article.tags = tags;
+    article.nextPart = nextPart;
+    // article._id =_id ?  _id : "";
+    // await article.update({
+    //     title,
+    //     content,
+    //     author,
+    //     prevPart,
+    //     tags,
+    //     nextPart
+    // });
+    // await article.findByIdAndDelete(_id)
+    await article.save();
+    // try {
+    //     await ArticleData.findByIdAndUpdate({
+    //         title,
+    //         content,
+    //         author,
+    //         prevPart,
+    //         tags,
+    //         nextPart
+    //     })
+    // }
+    // catch (e) {
+    //     console.log(e);
+    // }
+    res.status(200).json({
+        success: true,
+        message: "Article updated successfully",
+        data: article
+    });
+
+})
+
+module.exports.updateArticle = updateArticle
 
 
 req = {

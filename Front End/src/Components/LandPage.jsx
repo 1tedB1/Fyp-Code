@@ -39,7 +39,12 @@ function LandPage() {
                 <h1 className='headings thirdHeading'>
                 لوگ ہمارے بارے میں کیا کہہ رہے ہیں
                 </h1>
-                <Card className="test1" imgPath={"./src/assets/logo.png"} text={"Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto harum facere hic numquam minima enim quos quisquam et, atque sed veritatis ratione architecto cupiditate. Nobis magni alias libero quae impedit"}></Card>
+                <Card 
+                className="test1" 
+                imgPath={"./src/assets/book.jpg"} 
+                text={"اس ویب سائٹ نے مجھے اردو زبان میں معیاری مواد پڑھنے اور خود بھی لکھنے کا بہترین پلیٹ فارم فراہم کیا۔                ویب سائٹ کا انٹرفیس بہت ہی دوستانہ اور ستعمال میں آسان ہے۔ مختلف موضوعات پر بلاگز کو پڑھنا اور نئے بلاگ پوسٹس کو ڈھونڈنا بے حد آسان ہے۔ ہر بلاگ کا ڈیزائن صاف ستھرا اور دلکش ہے، جو قاری کو مواد پر مرکوز رہنے میں مدد دیتا ہے۔"}>
+
+                </Card>
         </div>
 
         </div >

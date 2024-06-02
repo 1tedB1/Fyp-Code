@@ -16,16 +16,12 @@ const pairSchema = new mongoose.Schema({
         ref: 'userData',
         required: true
     },
-    sharedWork: {
-        type: String,
-        required: true
+    workShared: {
+        owner: Schema.Types.ObjectId,
+        content:String,
+        review:String
     },
-    review: {
-        type: String,
-        required: true
-    }
-
-
+    
 } , {collection:"pair-data"}
 );
 
