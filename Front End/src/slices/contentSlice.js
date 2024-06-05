@@ -39,7 +39,7 @@ export const likeArticle = createAsyncThunk('article/likeArticle', async (articl
     // console.log("article ", article);
     try {
         const response = await axios.post('http://localhost:4000/api/v1/likeArticle', article)
-        return response.data.message
+        return response.data.likingUser
     } catch (error) {
         throw error
     }
@@ -63,7 +63,7 @@ export const deleteContent = createAsyncThunk('article/deleteContent', async (ar
 
     } catch (error) {
         console.log(error);
-        
+
         throw error
     }
 
@@ -100,12 +100,12 @@ const contentSlice = createSlice({
                 existingArticle.content = content
             }
         },
-        
+
         articleSelected: (state, action) => {
             state.selectedArticle = action.payload
 
         },
-        removeSelectedArticle: (state, action) =>{
+        removeSelectedArticle: (state, action) => {
             state.selectedArticle = null;
         }
 
@@ -152,11 +152,41 @@ const contentSlice = createSlice({
                 console.log("suded called");
 
                 state.changeInProgress = true
-                
+
 
             })
-            .addCase(likeArticle.fulfilled, (state, action) => {
+            .addCase(likeArticle.fulfilled, (state, { payload }) => {
                 console.log("succeded called");
+                const user = payload
+                console.log("user", user);
+                if (payload) {
+
+
+                    // console.log("actoj", state.articles[0].likes);
+                    const dislikes = state.articles.find(article => article.author._id === user._id).dislikes;
+                    const likes = state.articles.find(article => article.author._id === user._id).likes;
+                    console.log("dislikes", dislikes);
+                    console.log("likes", likes)
+                    if (dislikes.find(dislike => dislike._id === user._id)) {
+                        let index = 0;
+                        dislikes.forEach((dislike, i) => {
+                            if (dislike._id === user._id) {
+                                index = i;
+                            }
+                        });
+                        // console.log("dislikes[index]",dislikes[index]);
+                        // const index = dislikes.indexOf(userId);
+                        dislikes.splice(index, 1);
+                    }
+                    if (likes.find(like => like._id === user._id)) {
+                        console.log("already liked");
+
+
+                    }
+                    else {
+                        likes.push(user);
+                    }
+                }
                 state.changeInProgress = false
 
             })
@@ -179,13 +209,13 @@ const contentSlice = createSlice({
                 state.changeInProgress = false
 
             })
-            .addCase(deleteContent.pending, (state)=>{
+            .addCase(deleteContent.pending, (state) => {
                 state.status = "deleting"
             })
-            .addCase(deleteContent.rejected,(state)=>{
+            .addCase(deleteContent.rejected, (state) => {
                 state.status = "rejected"
             })
-            .addCase(deleteContent.fulfilled, (state)=>{
+            .addCase(deleteContent.fulfilled, (state) => {
                 state.status = "succeeded"
             })
     }

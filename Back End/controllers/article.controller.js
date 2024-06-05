@@ -42,6 +42,7 @@ module.exports.likeContent = catchAsync(async (req, res) => {
     const { articleId, userId } = req.body;
     // console.log(articleId,"   ",'664ed78989f076f759eb06c4');
     const article = await ArticleData.findById(articleId);
+    const likingUser = await User.findById(userId)
     const likes = article.likes;
     const dislikes = article.dislikes;
     if (dislikes.includes(userId)) {
@@ -64,6 +65,7 @@ module.exports.likeContent = catchAsync(async (req, res) => {
     res.status(200).json({
         success: true,
         message: "Article liked successfully",
+        likingUser: likingUser
     });
 })
 

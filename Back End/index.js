@@ -1,6 +1,7 @@
 //create an express server
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');  
 
 // // const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -8,7 +9,9 @@ const mongoose = require('mongoose');
 
 // // const config = require('./DB.js');
 //use cors to allow cross origin resource sharing
+app.use(bodyParser.json({ limit: '50mb' }));
 app.use(cors());
+
 app.use(express.json());
 
 
@@ -16,7 +19,12 @@ app.use(express.json());
 mongoose.connect('mongodb://localhost:27017/Andaz-E-Bayan', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = global.Promise;
 
-
+// mongoose.once('open', () => {
+//     // Init stream
+//     gfs = Grid(conn.db, mongoose.mongo);
+//     gfs.collection('uploads');
+//   });
+  
 
 const userRoute = require('./routes/user.route')
 const contentRoute = require('./routes/article.route')
@@ -24,7 +32,9 @@ const feedbackRoute = require('./routes/feedback.route')
 const tagRoute = require('./routes/tag.route')
 const compRoute = require('./routes/competition.route')
 const teamRoute = require('./routes/team.route')
-
+const pairRequestRoute = require('./routes/pairRequest.route')
+const pairRoute = require('./routes/pair.route')
+const chatRoute = require('./routes/chat.route')
 
 app.use('/api/v1', userRoute);
 app.use('/api/v1', contentRoute);
@@ -32,7 +42,9 @@ app.use('/api/v1', feedbackRoute);
 app.use('/api/v1', tagRoute);
 app.use('/api/v1', compRoute);
 app.use('/api/v1', teamRoute);
-
+app.use('/api/v1', pairRequestRoute);
+app.use('/api/v1', pairRoute);
+app.use('/api/v1', chatRoute)
 
 //testing purpose 
 // console.log(user);

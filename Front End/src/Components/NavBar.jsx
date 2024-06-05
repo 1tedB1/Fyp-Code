@@ -103,7 +103,7 @@ const Navbar = () => {
     return (
         <header className="header">
             <nav className="nav container">
-                <NavLink to="/" className="nav__logo">
+                <NavLink to="/homepage" className="nav__logo">
                     <img src="src\assets\logo.png" alt="" width='50px' className='logo' />
                 </NavLink>
 
@@ -126,6 +126,7 @@ const Navbar = () => {
                                 بلاگ
                             </NavLink>
                         </li>
+
                         <li className="nav__item">
                             <NavLink
                                 to=""
@@ -148,6 +149,15 @@ const Navbar = () => {
                                 پروفائل
                             </NavLink>
                         </li>
+                            <li className="nav__item">
+                                <NavLink
+                                    to="/users"
+                                    className="nav__link"
+                                    onClick={closeMenuOnMobile}
+                                >
+                                    یوذرز
+                                </NavLink>
+                            </li>
                             <li className="nav__item">
                                 <NavLink
                                     to="/messages"
@@ -209,12 +219,12 @@ const Navbar = () => {
 
                     </ul>
                     <div className="nav__close" id="nav-close" onClick={toggleMenu}>
-                        <IoClose />
+                        <IoClose style={{color:"black"}} />
                     </div>
                 </div>
 
                 <div className="nav__toggle" id="nav-toggle" onClick={toggleMenu}>
-                    <IoMenu />
+                    <IoMenu style={{color:"black"}}/>
                 </div>
             </nav>
         </header>

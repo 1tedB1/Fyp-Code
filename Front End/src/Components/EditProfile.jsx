@@ -4,7 +4,7 @@ import { faClock, faImage, faMessage, faUser } from "@fortawesome/free-solid-svg
 import { faKey } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsers, getUser } from '../slices/userSlice';
+import { editProfile, fetchUsers, getUser } from '../slices/userSlice';
 
 
 
@@ -21,9 +21,13 @@ function EditProfile() {
 
     let navigate = useNavigate()
 
-    useEffect(() => {
+    const callDispatchers = ()=>{
         dispatch(fetchUsers())
         dispatch(getUser())
+    }
+
+    useEffect(() => {
+        callDispatchers()
 
     }, [])
 
@@ -40,13 +44,18 @@ function EditProfile() {
         const [password, setPassword] = useState(currentUser.password)
         const [name, setName] = useState(currentUser.name)
         const [img, setImg] = useState("")
-        const [dob, setDob] = useState(currentUser.dob)
+        const [dob, setDob] = useState(new Date(currentUser.dob))
+        // console.log("dob", dob);
         const [opacityL, setopacityL] = useState(0)
 
 
         function formSumbitted(e) {
             e.preventDefault()
-            dispatch(editProfile())
+            dispatch(editProfile({ email, password, name, dob, img }))
+            while(userState.status == 'loading'){
+                console.log("loading");
+            }
+            callDispatchers()
         }
     
 
@@ -116,7 +125,7 @@ function EditProfile() {
                     </div>
                 </div>
 
-                <div className='dobDiv'>
+                {/* <div className='dobDiv'>
                     <label htmlFor="dob">تاریخ          پیداش</label>
                     <div className='inputDiv'>
                         <div className='iconDiv'>
@@ -128,10 +137,13 @@ function EditProfile() {
                             className="dobField"
                             id="dob"
                             value={dob}
-                            onChange={(e) => { setDob(e.target.value) }}
+                            onChange={(e) => {
+                                console.log(dob); 
+                                setDob(e.target.value)
+                             }}
                         />
                     </div>
-                </div>
+                </div> */}
 
 
                 <div className='passwordDiv'>

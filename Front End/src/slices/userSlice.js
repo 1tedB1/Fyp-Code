@@ -18,6 +18,16 @@ export const fetchUsers = createAsyncThunk("user/fetchUsers", async () => {
     // return data
 })
 
+export const editProfile = createAsyncThunk("user/editProfile", async ({ email, password, name, dob, img }) => {
+    try {
+        const response = await axios.put("http://localhost:4000/api/v1/editProfile", { email, password, name, dob, img })
+        return response.data
+    }catch(e){
+        console.log(e);
+        throw e;
+    }
+})
+
 export const loginUser = createAsyncThunk("user/loginUser", async ({ email, password }) => {
     try {
         const response = await axios.post("http://localhost:4000/api/v1/login", { email, password })
@@ -37,7 +47,7 @@ export const loginUser = createAsyncThunk("user/loginUser", async ({ email, pass
 export const getUser = createAsyncThunk("user/getUser", async () => {
     try {
         // console.log("hererere")
-        if(!localStorage.getItem("token")) throw new Error("No token found")
+        if (!localStorage.getItem("token")) throw new Error("No token found")
         const token = localStorage.getItem("token")
         const response = await axios.post("http://localhost:4000/api/v1/getUser", { token })
         // console.log("res", response);
@@ -47,6 +57,25 @@ export const getUser = createAsyncThunk("user/getUser", async () => {
         throw e;
     }
 })
+
+export const blockUser = createAsyncThunk("user/blockUser", async ({ userId, blockedUserId }) => {
+    try {
+        const response = await axios.post("http://localhost:4000/api/v1/blockUser", { userId, blockedUserId })
+        return response.data
+    } catch (e) {
+        throw e;
+    }
+})
+
+export const unblockUser = createAsyncThunk("user/unblockUser", async (details) => {
+    try {
+        const response = await axios.post("http://localhost:4000/api/v1/unblockUser", details)
+        return response.data
+    } catch (e) {
+        throw e;
+    }
+})
+
 
 
 const userSlice = createSlice({
@@ -58,6 +87,7 @@ const userSlice = createSlice({
         userId: "",
         loggedInUser: null,
         token: "",
+        blocking:true,
     },
     reducers: {
         logOutUser: (state) => {
@@ -82,6 +112,7 @@ const userSlice = createSlice({
                 // state.status = 'succeeded';
                 state.users = action.payload;
                 state.isAuthenticated = true;
+                state.status = "success"
             })
             .addCase(fetchUsers.rejected, (state, action) => {
                 state.status = 'loggedOut';
@@ -128,6 +159,48 @@ const userSlice = createSlice({
                 state.status = 'loggedOut'
                 state.loggedInUser = null;
             })
+            .addCase(editProfile.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(editProfile.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                // state.users = action.payload;
+                // state.isAuthenticated = true;
+            })
+            .addCase(editProfile.rejected, (state, action) => {
+                state.status = 'failed';
+                // state.error = action.error.message;
+            })
+            .addCase(blockUser.pending, (state) => {
+                state.blocking = true;
+
+            })
+            .addCase(blockUser.fulfilled, (state, action) => {
+                state.blocking = false;
+                // state.users = action.payload;
+                // state.isAuthenticated = true;
+            })
+            .addCase(blockUser.rejected, (state, action) => {
+                state.status = 'failed';
+                // state.error = action.error.message;
+            })
+            .addCase(unblockUser.pending, (state) => {
+                // state.status = 'loading';
+                state.blocking = true;
+
+            })
+            .addCase(unblockUser.fulfilled, (state, action) => {
+                // state.status = 'succeeded';
+                state.blocking = false;
+                // state.users = action.payload;
+                // state.isAuthenticated = true;
+            })
+            .addCase(unblockUser.rejected, (state, action) => {
+                // state.status = 'failed';
+                state.blocking = false;
+                // state.error = action.error.message;
+            })
+
     }
 })
 

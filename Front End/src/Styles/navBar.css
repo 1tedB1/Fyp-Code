@@ -34,7 +34,7 @@
 
 .nav__cta {
     background-color: var(--first-color);
-    color: var(--title-color);
+    color: black;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -87,7 +87,7 @@
 }
 
 .nav__link {
-    color: var(--title-color);
+    color: black;
     font-weight: var(--font-semi-bold);
     transition: color 0.4s;
 }

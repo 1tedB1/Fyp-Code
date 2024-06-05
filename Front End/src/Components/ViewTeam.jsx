@@ -123,20 +123,8 @@ function ViewTeam() {
           placeholder={"مواد کو دیکھنے اور اس پر کام کرنے کے لئے منتخب کریں"}
           // defaultValue={selectedTag}
           onChange={(e) => {
-            // console.log(e.value);
-            // console.log("e", team.sharedWork[e.value]);
             setSelectedSharedWork(team.sharedWork[e.value])
-
             console.log("he");
-            // setSelectedTag(prevState => {
-            //   // console.log(prevState);
-            //   if (prevState.includes(e.value)) {
-            //     return prevState;
-            //   }
-
-            //   return [...prevState, e.value]
-            // })
-
           }}
           options={sharedContent}
         ></Select>

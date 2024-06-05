@@ -15,6 +15,10 @@
 @import url(./MainProfile.css);
 @import url(./team.css);
 @import url(./viewteam.css);
+@import url(./buddies.css);
+@import url(./users.css);
+@import url(./messages.css);
+@import url(./adminPage.css);
 /* Custom Font Regular */
 
 @font-face {

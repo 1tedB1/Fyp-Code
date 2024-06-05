@@ -1,0 +1,31 @@
+/* .adminPage{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+} */
+
+.adminPage>div{
+    /* margin: auto; */
+    width: 50%;
+    border: 2.5px solid #DFE4E6;
+    border-radius: 10px;
+    padding: 1% 0%;
+    
+}
+
+.adminPage_content{
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.adminPage_users{
+    max-height: 50vh;
+    overflow-y: auto;
+    
+}
+
+.adminPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

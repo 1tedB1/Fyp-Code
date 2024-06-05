@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAllArticles } from '../slices/contentSlice'
 import { fetchUsers, getUser } from '../slices/userSlice'
 import Article from './Article'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate, useParams } from 'react-router-dom'
 
 
-function MainProfile() {
+function ViewProfile() {
 
-
+    const {id} = useParams()
     const dispatch = useDispatch()
     const contentState = useSelector(state => state.content)
     const userState = useSelector(state => state.user)
@@ -39,13 +39,14 @@ function MainProfile() {
         return <h1>Loading...</h1>;
     }
 
-    const user = userState.loggedInUser;
+    const user = userState.users.find(user => user._id == id);
+    console.log("user",user);
     const userName = user.name
 
 
     const renderArticles = () => {
         // console.log(constes);
-        if ((contentState.articles.filter(a => a.author._id == userState.loggedInUser.id)).length == 0) {
+        if ((contentState.articles.filter(a => a.atuhor == user.id)).length == 0) {
             console.log("hi");
             return <div className='article'>
                 <h3 style={{ textAlign: "center", width: "100%" }}>
@@ -62,6 +63,7 @@ function MainProfile() {
 
         }
         return contentState.articles.map((article, index) => {
+            // console.log(article.author._id, user._id);
             if (article.author._id == user._id)
                 return (
 
@@ -99,12 +101,12 @@ function MainProfile() {
                     <h4>{userName} </h4>
                 </div>
                 <div className='main-profile-firstDiv-buttons'>
-                    <button onClick={() => {
-                        navigate('/buddies')
-                    }}>Buddies</button>
-                    <button onClick={() => navigate('/editProfile')}>Edit</button>
-
-                    <button onClick={() => { navigate('/teams') }}>Teams</button>
+                    {/* <button onClick={() => {
+                        
+                    }}>Block</button> */}
+                    {/* <button onClick={() => {}}>Pair Request</button> */}
+                    <button onClick={() => {navigate(`/messages/${user._id}`)}}>Message</button>
+                    {/* <button onClick={() => { navigate('/teams') }}>Teams</button> */}
                 </div>
             </div>
 
@@ -115,4 +117,4 @@ function MainProfile() {
     )
 }
 
-export default MainProfile
+export default ViewProfile

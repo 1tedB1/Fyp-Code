@@ -6,6 +6,9 @@ import feedbackSlice from "./slices/feedbackSlice";
 import tagSlice from "./slices/tagSlice"
 import competitionSlice from "./slices/competitionSlice";
 import teamSlice from "./slices/teamSlice";
+import pairRequestSlice from "./slices/pairRequestSlice";
+import pairSlice from "./slices/pairSlice";
+import chatSlice from "./slices/chatSlice";
 
 
 
@@ -17,9 +20,13 @@ const store = configureStore({
         user: userSlice,
         content: contentSlice,
         feedback: feedbackSlice,
-        tag:tagSlice,
+        tag: tagSlice,
         competition: competitionSlice,
-        team: teamSlice
+        team: teamSlice,
+        pair: pairSlice,
+        pairRequest: pairRequestSlice,
+        chat: chatSlice,
+
     }
 })
 

@@ -4,6 +4,7 @@ import { faClock, faImage, faMessage, faUser } from "@fortawesome/free-solid-svg
 import { faKey } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 
 
@@ -20,32 +21,54 @@ function Register() {
     const [img, setImg] = useState('')
     const [dob, setDob] = useState(Date.now())
     const [opacityL, setopacityL] = useState(0)
-    
+
 
     const a = <FontAwesomeIcon icon={faUser} className='searchIcon' />;
     let navigate = useNavigate()
     async function formSumbitted(e) {
         e.preventDefault()
-        const res = await fetch('http://localhost:4000/api/v1/register', {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name,
-                email,
-                password
+        // let formData = new FormData()
+        // formData.append('file',img)
+        // console.log('file',formData); 
+        // console.log(img);
+        const reader = new FileReader();
+        reader.readAsDataURL(img);
+        let bs64 = "ب";
+        reader.onloadend = async () => {
+            const base64String = reader.result.replace(/^data:(.*,)?/, '');
+            bs64 = {
+                name: img.name,
+                type: img.type,
+                data: base64String,
+            };
+            let avatar = bs64;
+            console.log("avava", avatar);
+            // const res = await axios.post('http://localhost:4000/api/v1/register',{name,email,password,avatar,dob})
+            const res = await fetch('http://localhost:4000/api/v1/register', {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    password,
+                    avatar,
+                    dob
+                }),
+                // avatar:img
+
             })
+            const data = await res.json()
+            if (data.success === true) {
+                navigate('/login')
 
-        })
-        const data = await res.json()
-        if (data.success === true) {
-            navigate('/login')
+            }
+            else {
+                setopacityL(1)
+            }
+        }
 
-        }
-        else {
-            setopacityL(1)
-        }
     }
     return (
         <>
@@ -103,7 +126,7 @@ function Register() {
                                 type="file"
                                 className="imgField"
                                 id="img"
-                                value={img}
+                                // value={img}
                                 width="48" height="48"
                                 onChange={(e) => {
                                     let filePath = e.target.value
@@ -113,8 +136,8 @@ function Register() {
                                         e.target.value = ''
                                         return
                                     }
-
-                                    setImg(e.target.value)
+                                    console.log("img", e.target.files[0]);
+                                    setImg(e.target.files[0])
                                 }}
                             />
                         </div>

@@ -12,7 +12,7 @@ function Teams() {
   const userState = useSelector(state => state.user)
   const dispatch = useDispatch()
   const teamState = useSelector(state => state.team)
-  
+
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
   const navigate = useNavigate()
@@ -62,6 +62,13 @@ function Teams() {
 
   const Team = () => {
     // const [teamsLength , setTeamsLength] = useState(userTeams.length)
+    if (userTeams.length == 0) {
+      return (
+        <div className='main-profile-firstDiv team-div'>
+          <h4 style={{textAlign:"center", width:"100%"}}>آپ کسی ٹیم میں نہیں</h4>
+        </div>
+      )
+    }
     return userTeams.map((team, index) => {
       // console.log("team", team);
       const members = team.members.map(member => member._id)
@@ -86,9 +93,8 @@ function Teams() {
             <button onClick={() => {
               navigate(`/viewTeam/${team._id}`)
             }}>View Work</button>
-            {/* <SE>Add Members</button> */}
-            {/* <button onClick={e => { AddMembers(availableUsersToAdd) }}>Add members</button> */}
-            <button onClick={()=>deleteThisTeam(team._id)}>Delete</button>
+
+            <button onClick={() => deleteThisTeam(team._id)}>Delete</button>
 
           </div>
 
@@ -98,63 +104,25 @@ function Teams() {
   }
 
 
-  // const excludingUser = userState.users.filter(user => {
-  //   return user._id !== userState.loggedInUser._id
-  // })
-
-  // console.log("ex ", excludingUser);
-
-  // const availableUsersToAdd = [];
-
-  // excludingUser.forEach(user => {
-  //   members.forEach(member => {
-  //     console.log("bd", member);
-  //     if(user._id != member._id){
-  //       if(!availableUsersToAdd.includes(member))
-  //         availableUsersToAdd.push(member)
-  //     }
-  //   })
-  // })
-  // console.log("finale ", availableUsersToAdd);
 
 
-  return <div style={{padding:"5% 10%"}} className='main-profile team-page'>
+
+  return <div style={{ padding: "5% 10%" }} className='main-profile team-page'>
     <div className='main-profile-firstDiv'>
       <h4>ٹیمز بنائیں اور اپنے دوستوں کے ساتھ کام کریں</h4>
       <div className='main-profile-firstDiv-buttons team-buttons'>
-      <button onClick={()=>{navigate('/createTeam')}} >Create Team</button>
+        <button onClick={() => { navigate('/createTeam') }} >Create Team</button>
       </div>
     </div>
 
-    <h1 style={{margin:"2% 1%"}}>آپ کی ٹیمز</h1>
+    <h1 style={{ margin: "2% 1%" }}>آپ کی ٹیمز</h1>
 
     <Team></Team>
     {/* The pop up */}
 
     {/* The pop up */}
   </div>
-  //     <div>
-  //       <img
-  //         onClick={e => {
-  //           window.open(e.target.src, '_blank');
-  //         }}
-  //         className="profile-pic"
-  //         src="src\\assets\\user.jpg"
-  //         alt="dfdf" />
-  //       <h4> </h4>
-  //     </div>
-  //     <div className='main-profile-firstDiv-buttons'>
-  //       <button>Buddies</button>
-  //       <button>Edit</button>
 
-  //       <button onClick={() => { navigate('/teams') }}>Teams</button>
-  //     </div>
-  //   </div>
-
-  //   <div className='main-profile-secondDiv'>
-  //     {/* {renderArticles()} */}
-  //   </div>
-  // </div >
 
 }
 

@@ -8,7 +8,7 @@ function Fotter() {
             <footer className='footer'>
                 <div className='firstSection'>
                     <h4 className='footer--item'>
-                        <NavLink className={"navlink"} to="/hompepage">پڑھیں</NavLink>
+                        <NavLink className={"navlink"} to="/homepage">پڑھیں</NavLink>
                     </h4>
                     <h4 className='footer--item'>
                         <NavLink className={"navlink"} to="/competition">مقابلہ</NavLink>
@@ -17,7 +17,7 @@ function Fotter() {
                         {/* <NavLink className={"navlink"} to="/competition">نثر</NavLink>        */}
                     </h4>
                     <h4 className='footer--item'>
-                        <NavLink className={"navlink"} to="/hompepage">بلاگ</NavLink>
+                        <NavLink className={"navlink"} to="/homepage">بلاگ</NavLink>
                     </h4>
                     <h4 className='footer--item'>
                         <NavLink className={"navlink"} to="/aboutus">ہمیں جانیں</NavLink>

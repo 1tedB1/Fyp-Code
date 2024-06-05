@@ -49,10 +49,10 @@ function ViewContent() {
     }
 
     // console.log("userState.loggedInUser", userState.loggedInUser);
-    if(userState.loggedInUser)
-    if (contentState.articles[id]._id.includes(userState.loggedInUser._id)) {
-        setLiked(true)
-    }
+    if (userState.loggedInUser)
+        if (contentState.articles[id]._id.includes(userState.loggedInUser._id)) {
+            setLiked(true)
+        }
     dispatch(articleSelected(contentState.articles[id]))
 
     // let title="", content="", authName="", comments="";
@@ -193,7 +193,7 @@ function ViewContent() {
                     </form>
                     <p className='story_likes'>
                         <FontAwesomeIcon onClick={(e) => {
-                            if(!userState.loggedInUser){
+                            if (!userState.loggedInUser) {
                                 alert("You need to login to like the article")
                                 return;
                             }
@@ -204,7 +204,7 @@ function ViewContent() {
                             dispatch(likeArticle({ articleId: article._id, userId: userState.userId }))
                             callDispathcers()
                         }}
-                            icon={faThumbsUp} className={`searchIcon ${liked ? likeButton : ""}`} />
+                            icon={faThumbsUp} className={`searchIcon ${liked ? "likeButton" : ""}`} />
                         {likes.length} لایکس</p>
                 </div>
                 <div className='posted_comments'>

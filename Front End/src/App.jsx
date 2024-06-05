@@ -19,6 +19,13 @@ import Teams from './Components/Teams';
 import ViewTeam from './Components/ViewTeam';
 import CreateTeam from './Components/CreateTeam';
 import EditProfile from './Components/EditProfile';
+import Buddies from './Components/Buddies';
+import Pair_ShareWork from './Components/Pair_ShareWork';
+import Pair_ReviewWork from './Components/Pair_ReviewWork';
+import Users from './Components/Users';
+import Messages from './Components/Messages';
+import ViewProfile from './Components/ViewProfile';
+import AdminPage from './Components/AdminPage';
 // import { FontAwesomeIcon } from "@fortawesome/fontawesome-svg-core";
 
 // const userContext = createContext()
@@ -45,8 +52,16 @@ function App() {
           <Route path='/mainProfile' element={<MainProfile />}></Route>
           <Route path='/teams' element={<Teams />}></Route>
           <Route path='/viewTeam/:id' element={<ViewTeam />}></Route>
-          <Route path='/createTeam' element={<CreateTeam />}></Route> 
-          <Route path='/editProfile' element = {<EditProfile/>}></Route>
+          <Route path='/createTeam' element={<CreateTeam />}></Route>
+          <Route path='/editProfile' element={<EditProfile />}></Route>
+          <Route path='/buddies' element={<Buddies />}> </Route>
+          <Route path='/pair/shareWork/:id' element={<Pair_ShareWork />}></Route>
+          <Route path='/pair/reviewWork/:id' element={<Pair_ReviewWork />}></Route>
+          <Route path='/users' element={<Users />}></Route>
+          <Route path='/messages/:toId' element={<Messages />}></Route>
+          <Route path='/messages/' element={<Messages />}></Route>
+          <Route path='/viewProfile/:id' element={<ViewProfile />}></Route>
+          <Route path='/adminPage' element={<AdminPage />}></Route>
         </Routes>
         <Footer></Footer>
       </Router>

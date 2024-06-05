@@ -151,6 +151,7 @@
     /* border: 2.5px solid grey; */
     /* /* width: 15%; */
     border-radius: 10px;
+    width: 100% !important;
     /* align-content: center; */
     /* margin-top: 1%; */
     /* color: var(--text-100); */ 

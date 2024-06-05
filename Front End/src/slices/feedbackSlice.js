@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getAllFeedBack = createAsyncThunk("feedback/getAllFeedBack", async () => {
     try {
-        const response = await axios.get("http://localhost:4000/api/v1/getAllFeedback")
+        const response = await axios.post("http://localhost:4000/api/v1/getAllFeedback")
         return response.data.data
     } catch (e) {
         console.log(e);

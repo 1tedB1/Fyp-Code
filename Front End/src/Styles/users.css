@@ -1,0 +1,38 @@
+.users_page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2% 0;
+}
+
+.user_page_first_div {
+    padding: 0% 2%;
+    margin: auto;
+    margin-bottom: 1%;
+}
+
+/* Add media query for screens smaller than 600px */
+@media (max-width: 600px) {
+    .users_page {
+        flex-direction: column;
+    }
+    
+    .user_page_first_div {
+        flex-direction: column;
+        padding: 0% 1%;
+        width: 90%;
+    }
+    .user_page_fd_buttonD{
+        width: 100%;
+        /* display: flex; */
+        justify-content: center;
+        /* outline: 1px solid black; */
+    }
+    .user_page_fd_buttonD button{
+        /* background-color: black; */
+        width: 100% !important;
+        /* font-size: smallest; */
+        font-weight: lighter;
+    }
+}

@@ -33,9 +33,14 @@ function CreateTeam() {
     ) {
         return <h1>Loading...</h1>;
     }
+    let availableUsers;
 
-
-    let availableUsers = userState.users.map(user => { return user._id != userState.loggedInUser._id ? { value: user._id, label: user.name } : { value: "", label: "" } })
+    try{
+        availableUsers = userState.users.map(user => { return user._id != userState.loggedInUser._id ? { value: user._id, label: user.name } : { value: "", label: "" } })
+    }
+    catch(e){
+        return <h1>issue</h1>
+    }
     availableUsers = availableUsers.filter(user => user.value != "")
     console.log(availableUsers);
 
